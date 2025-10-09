@@ -1,0 +1,71 @@
+\documentclass[a4paper,12pt, uplatex, dvipdfmx]{jsarticle}
+\usepackage{amsmath,amsthm,amssymb,amsfonts,fancyhdr, enumerate, setspace, braket, emathEy, graphicx}
+
+\newcommand{\ds}{\displaystyle}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{定理}
+\newtheorem*{theorem*}{定理}
+\newtheorem*{definition}{定義}
+\newtheorem{lemma}{補題}
+\newtheorem{example}{例}
+\newtheorem*{remark}{注意}
+\newtheorem*{promis}{約束}
+\renewcommand{\proofname}{証明}
+\renewcommand{\thesection}{\arabic{section}}
+
+\renewcommand{\arraystretch}{1.3}
+\setcounter{section}{5}
+
+%\setstretch{1.1}
+
+
+\chead{7. 面積，曲線の長さ}
+\lhead{}
+\rhead{}
+
+
+\pagestyle{fancy}
+
+\begin{document}
+
+
+\subsection*{練習問題 解答}
+
+
+\begin{enumerate}
+
+  \setlength{\itemsep}{2zh}
+  
+\item $y=\sin x, \; y=\cos x, \; x=\frac{\pi}{4}, \; x=\frac{5\pi}{4}$ で囲まれる部分の面積を求めればよい．
+  \[
+    \int_{\frac{pi}{4}}^{\frac{5\pi}{4}} \left( \sin x - \cos x\right) dx
+    = \Big[ -\cos x - \sin x\Big]_{\frac{\pi}{4}}^{\frac{5\pi}{4}}
+    = 2 \sqrt{2}
+  \]
+
+\item
+  \[
+    \begin{aligned}
+      \int_{0}^{\pi} \sqrt{ \left( \frac{dx}{dt}\right)^2 + \left(\frac{dy}{dt}\right)^2} \ dt
+      &= \int_{0}^{\pi} \sqrt{\left( 1-\cos t\right)^2 + \left( -\sin t\right)^2} \ dt\\
+      &= \int_{0}^{\pi} \sqrt{2-2 \cos t}\ dt = \int_{0}^{\pi}\sqrt{ 4 \sin^2 \frac{t}{2}} \ dt\\
+      &= 2 \int_{0}^{\pi} \sin \frac{t}{2} \ dt =-4 \left[ \cos \frac{t}{2}\right]_{0}^{\pi} = 4
+    \end{aligned}
+  \]
+
+\item
+  \[
+    \begin{aligned}
+      \int_{0}^{\log 2} \sqrt{ 1+ \left( \frac{dy}{dx}\right)^2} \ dx
+      &= \int_{0}^{\log 2} \sqrt{ 1+ \sinh^2 x} \ dx = \int_{0}^{\log 2} \sqrt{\cosh^2 x} \ dx\\
+      &= \int_{0}^{\log 2} \cosh x \ dx = \left[ \sinh x\right]_{0}^{\log 2}
+      = \sinh\left( \log 2\right) =\frac{3}{4}
+    \end{aligned}
+  \]
+\end{enumerate}
+
+
+
+\end{document}
+
