@@ -11,4 +11,4 @@
 <br>
 
 双曲線関数とそれにまつわる積分についてまとめました
-- [双曲線関数について](https://github.com/kazutsumi/hyperbolic/blob/main/hyperbolic.pdf)
+- [双曲線関数について](https://github.com/kazutsumi/hyperbolic)
