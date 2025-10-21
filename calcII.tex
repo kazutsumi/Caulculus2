@@ -2693,23 +2693,29 @@ $\ds \sum_{n=0}^{\infty}a_n$ の値は $\alpha$
   である．$|r|\geqq 1$ のとき，この等比級数は発散する．
 \end{example}
 
+\newpage
+
+\begin{remark}
+以後，混乱のおそれがないところでは $\ds \sum_{n=0}^{\infty}$ を単に $\sum$ と略して書く．
+\end{remark}
+
 \begin{theorem}[\textbf{級数の和・定数倍}]\label{thm:linear} 2つの級数
-  $\ds \sum_{n=0}^{\infty} a_n, \; \sum_{n=0}^{\infty} b_n$ が収束する
+  $\sum a_n, \; \sum b_n$ が収束する
   とき，任意の定数 $k, l \in \mathbb{R}$ に対して，級数
-  $\ds \sum_{n=0}^{\infty} \left(k a_n+ lb_n\right)$ も収束し，以下が成り立つ．
+  $\ds \sum \left(k a_n+ lb_n\right)$ も収束し，以下が成り立つ．
   \[
-    \sum_{n=0}^{\infty}\left( k a_n + l b_n\right)
-    = k\left(\sum_{n=0}^{\infty}a_n\right) + l \left(\sum_{n=0}^{\infty} b_n\right)
+    \sum \left( k a_n + l b_n\right)
+    = k\left( \sum a_n\right) + l \left(\sum  b_n\right)
   \]
 \end{theorem}
 
 \begin{theorem}\label{thm:seq0}
-  級数 $\ds \sum_{n=0}^{\infty} a_n$ が収束するなら，数
+  級数 $\ds \sum a_n$ が収束するなら，数
   列 $\{a_n\}$ は $0$ に収束する．
 \end{theorem}
 
 \begin{proof}
-  級数 $\ds \sum_{n=0}^{\infty} a_n$ が $\alpha$
+  級数 $\ds \sum  a_n$ が $\alpha$
   に収束するとし，$\ds S_n=\sum_{k=0}^{n}a_n$ とすると，$\ds \lim_{n \to \infty}S_n=\alpha$ だから
   \[
     a_n = S_n - S_{n-1}  \to \alpha - \alpha =0 \quad (n \to \infty)
@@ -2718,7 +2724,7 @@ $\ds \sum_{n=0}^{\infty}a_n$ の値は $\alpha$
 \end{proof}
 
 定理\ref{thm:seq0}の逆は成り立たない．つまり，数列 $\{a_n\}$ が $0$ に
-収束しても級数 $\ds \sum_{n=0}^{\infty}a_n$ が収束するとは限らない．
+収束しても級数 $ \sum a_n$ が収束するとは限らない．
 
 \begin{example}\label{exmp:harmonic}
   $a_n=\dfrac{1}{n}$ とすると，数列 $\{a_n\}$ は $0$ に収束する．一方，任意の自然数 $N$ に対して
@@ -2726,14 +2732,14 @@ $\ds \sum_{n=0}^{\infty}a_n$ の値は $\alpha$
     \sum_{n=1}^{N}a_n=\sum_{n=1}^{N} \frac{1}{n}
     \geqq \int_{1}^{N}\frac{dx}{x} = \log N \to \infty \quad (N \to \infty)
   \]
-  より，級数 $\ds \sum_{n=1}^{\infty} a_n$ は発散する．なお，部分和 $\ds \sum_{n=1}^{N} a_n$ は下図の灰色部分の面積に等しい．
+  より，級数 $\sum a_n$ は発散する．なお，部分和 $\ds \sum_{n=1}^{N} a_n$ は下図の灰色部分の面積に等しい．
   \begin{figure}[h]
     \centering
     \includegraphics[width=15cm]{./pictures/06/harmonic.pdf}
   \end{figure}
 \end{example}
 
-
+\newpage
 \subsection{べき級数}
 
 数列 $\{a_n\}$ と実数 $b$ と変数 $x$ によって
@@ -2796,12 +2802,12 @@ $\ds \sum_{n=0}^{\infty}a_n$ の値は $\alpha$
 \subsection{収束半径}
 
 \begin{theorem}\label{thm:conv-seriese}
-  べき級数 $\ds \sum_{n=0}^{\infty} a_n x^n$ が $x=b \; (\neq 0)$ で収
-  束するなら，$|x| < |b|$ を満たす全ての $x$ で絶対収束する．
+  べき級数 $\sum a_n x^n$ が $x=b \; (\neq 0)$ で収
+  束するなら，$|x| < |b|$ を満たす全ての $x$ で収束する．
 \end{theorem}
 
 \begin{proof}
-  級数 $\ds \sum_{n=0}^{\infty} a_n b^n$ が収束するので，数
+  級数 $\sum a_n b^n$ が収束するので，数
   列 $\{a_nb^n\}$ は $0$ に収束する．特に，数列 $\{a_n b^n\}$ は上にも
   下にも有界なので，全ての番号 $n \geq 0$ で $|a_n b^n| <M$ となる正の
   実数 $M$が存在する．このとき，各 $x$ に対して $\ds
@@ -2810,9 +2816,9 @@ $\ds \sum_{n=0}^{\infty}a_n$ の値は $\alpha$
     |a_n x^n| = \left| a_n b^n \cdot \frac{x^n}{b^n}\right| \leq M r^n
   \]
   が成り立つ．従って，$|x| < |b|$ すなわち $r<1$ ならば，級数
-  $\ds \sum_{n=0}^{\infty} Mr^n$ が収束するので
-  $\ds \sum_{n=0}^{\infty}|a_n x^n|$
-  も収束する．よって，$\ds \sum_{n=0}^{\infty} a_n x^n$ は収束す
+  $\sum Mr^n$ が収束するので
+  $\sum |a_n x^n|$
+  も収束する．よって，$\sum  a_n x^n$ は収束す
   る．
 \end{proof}
 
@@ -2834,7 +2840,7 @@ $\ds \sum_{n=0}^{\infty}a_n$ の値は $\alpha$
 定理\ref{thm:conv-seriese}は級数の発散を判定する以下の定理を導くこともできる．
 
 \begin{theorem}\label{thm:div-seriese}
-べき級数 $\ds \sum_{n=0}^{\infty} a_n x^n$ が $x=b$ で発散するな
+べき級数 $\sum a_n x^n$ が $x=b$ で発散するな
 ら，$|x| > |b|$ を満たす全ての $x$ で発散する．
 \end{theorem}
 
@@ -2846,7 +2852,7 @@ $|u|> |b|$ と
 
 
 \begin{definition}[\textbf{収束半径}]
-  べき級数 $\ds \sum_{n=0}^{\infty} a_n x^n$ が $|x| < r$ のとき収束
+  べき級数 $\sum a_n x^n$ が $|x| < r$ のとき収束
   し，$|x|>r$ のとき発散するとき，$r$ をこのべき級数の\textbf{収束半径}と
   いう．ただし，$x=0$ でのみ収束するときは $r=0$ とし，全ての実数 $x$
   で収束するときは $r=+\infty$ と定める．
@@ -2855,7 +2861,7 @@ $|u|> |b|$ と
 
 \begin{remark}
   収束半径 $r$ が $0 < r < +\infty$ のとき，定
-  理\ref{thm:conv-seriese}からべき級数 $\ds \sum_{n=0}^{\infty} a_n
+  理\ref{thm:conv-seriese}からべき級数 $\sum  a_n
   x^n$ は $|x| <r$ で収束し，$|x|>r$ で発散する．なお，$x= \pm r$ にお
   ける収束・発散は個別に調べなければわからない．
 \end{remark}
@@ -2871,8 +2877,32 @@ $|u|> |b|$ と
   \]
 \end{example}
 
+\newpage
+
+全ての $n$ で $a_n>0$ となる級数 $\sum a_n$ を\textbf{正項級数}という．
+
+\begin{theorem}[\textbf{Cauchy の収束判定法}]
+  正項級数 $\sum a_n$ に対して，$\ds \rho := \lim_{n \to \infty}
+  \sqrt[n]{a_n}$ とする．$\rho <1$ なら $\sum a_n$
+  は収束し，$\ds \rho >1 \; \left( \lim_{n \to \infty} \sqrt[n]{a_n} =
+    \infty \text{ も含む }\right)$ なら $\sum a_n$ は発散する．
+\end{theorem}
+
+\begin{theorem}[\textbf{d'Alembert の収束判定法}]
+  正項級数 $\sum a_n$
+  に対して，$\ds \rho:= \lim_{n \to \infty} \frac{a_{n+1}}{a_{n}}$ とす
+  る．$\rho <1$ なら $\sum a_n$
+  は収束し，$\ds \rho >1 \; \left( \lim_{n \to \infty} \frac{a_{n+1}}{a_n}
+    = \infty \text{ も含む } \right)$ なら $\sum a_n$ は発散する．
+\end{theorem}
+
+\begin{remark}
+  Cauchy の収束判定法も d'lAmbert の収束判定法も $\rho=1$ となるときに
+  は収束・発散に関して何も教えてくれない．その場合は個別に別の方法で調べなければならない．
+\end{remark}
+
 \begin{theorem}\label{thm:criterion}
-  べき級数 $\ds \sum_{n=0}^{\infty} a_n x^n$ の収束半径を $r$ とする．
+  べき級数 $ \sum a_n x^n$ の収束半径を $r$ とする．
   このとき次が成り立つ．
   \begin{enumerate}[(1)]
     \setlength{\itemsep}{1zh}
@@ -2896,7 +2926,7 @@ $|u|> |b|$ と
       \setlength{\itemsep}{1zh}
     \item $l |x| <1$ すなわち $|x| < \dfrac{1}{l}$ ならば，べき級数は絶対収束する．
     \item $l |x| >1$ すなわち $|x| > \dfrac{1}{l}$ ならば，級数
-      $\ds \sum_{n=0}^{\infty} |a_n x^n|$ は発散する．
+      $\sum |a_n x^n|$ は発散する．
     \end{itemize}
     よって，収束半径は $r=\dfrac{1}{l}$ である．
 
@@ -2907,7 +2937,7 @@ $|u|> |b|$ と
     \begin{itemize}
       \setlength{\itemsep}{1zh}
     \item $l|x| <1$ すなわち $|x| < \dfrac{1}{l}$ ならば，べき級数は絶対収束する．
-    \item $l|x| >1$ すなわち $|x| > \dfrac{1}{l}$ ならば，級数 $\ds \sum_{n=0}^{\infty} |a_n x^n|$ は発散する．
+    \item $l|x| >1$ すなわち $|x| > \dfrac{1}{l}$ ならば，級数 $\sum |a_n x^n|$ は発散する．
     \end{itemize}
     よって，収束半径は $r= \dfrac{1}{l}$ である．
   \end{enumerate}
@@ -2929,14 +2959,14 @@ $|u|> |b|$ と
 
 \subsection{項別積分・項別微分}
 
-べき級数 $\ds \sum_{n=0}^{\infty} a_n x^n$ の収束半径が $r>0$ なら，これは開区間 $(-r,r)$ 上の関数
+べき級数 $\sum a_n x^n$ の収束半径が $r>0$ なら，これは開区間 $(-r,r)$ 上の関数
 \[
-  f(x) = \sum_{n=0}^{\infty} a_n x^n = a_0 + a_1 x + a_2 x^2 + \cdots
+  f(x) = \sum  a_n x^n = a_0 + a_1 x + a_2 x^2 + \cdots
 \]
 を定義する．このとき，$f$ は $(-r,r)$ で連続である．
 
 \begin{theorem}[\textbf{項別積分}]\label{thm:term-int}
-  べき級数 $\ds f(x) = \sum_{n=0}^{\infty} a_n x^n$ の収束半径を $r>0$
+  べき級数 $f(x) = \sum a_n x^n$ の収束半径を $r>0$
   とする．このとき，開区間 $(-r,r)$ 上で以下が成り立つ．すなわち，右辺の収束半径は $r$ である．
   \[
     \int_{0}^{x} f(t) \ dt = \sum_{n=0}^{\infty} \frac{a_n}{n+1}x^{n+1}
@@ -2944,8 +2974,8 @@ $|u|> |b|$ と
 \end{theorem}
 
 \begin{theorem}[\textbf{項別微分}]\label{thm:term-diff}
-  べき級数 $\ds f(x) = \sum_{n=0}^{\infty} a_n x^n$ と
-  $\ds g(x) = \sum_{n=1}^{\infty} na_n x^{n-1}$ に次が成り立つ．
+  べき級数 $f(x) = \sum a_n x^n$ と
+  $g(x) = \sum  na_n x^{n-1}$ に次が成り立つ．
   \begin{enumerate}[(1)]
     
   \item $g(x)$ の収束半径は $f(x)$ の収束半径に等しい．
@@ -2956,18 +2986,18 @@ $|u|> |b|$ と
 \end{theorem}
 
 \begin{theorem}
-  正の収束半径 $r$ を持つべき級数 $\ds f(x) = \sum_{n=0}^{\infty} a_n
+  正の収束半径 $r$ を持つべき級数 $f(x) = \sum  a_n
   x^n$ は $(-r,r)$ で $C^{\infty}$ 級である．
 \end{theorem}
 \begin{proof}
-  定理\ref{thm:term-diff}より $\ds f'(x) = \sum_{n=1}^{\infty} n a_n
+  定理\ref{thm:term-diff}より $f'(x) = \sum  n a_n
   x^{n-1}$ であり，その収束半径も $r$ である．よって，定
   理\ref{thm:term-diff}を繰り返し適用して，$f$ は何回でも微分できること
   が示せる．
 \end{proof}
 
 \begin{theorem}\label{thm:coeff}
-  べき級数 $\ds f(x) = \sum_{n=0}^{\infty} a_n x^n$ が正の収束半
+  べき級数 $f(x) = \sum  a_n x^n$ が正の収束半
   径 $r$を持つとき，各 $n=0,1,2,\ldots$ に対して以下が成り立つ．
   \[
     a_n = \frac{f^{(n)}(0)}{n!}
@@ -2984,7 +3014,7 @@ $|u|> |b|$ と
 \begin{theorem}[\textbf{べき級数展開の一意性}]\label{thm:unique-seriese}
   $C^{\infty}$ 級関数 $f$ が，正の収束半径を持つべき級数として
   \[
-    f(x) = \sum_{n=0}^{\infty} a_n x^n = \sum_{n=0}^{\infty}b_n x^n
+    f(x) = \sum  a_n x^n = \sum b_n x^n
   \]
   と2通りに表せたとき，各 $n=0,1,2,\ldots$ に対して $a_n=b_n$ である．
 \end{theorem}
@@ -2993,6 +3023,8 @@ $|u|> |b|$ と
   定理\ref{thm:coeff}より，各 $n=0,1,2,\ldots$ に対して
   $\ds a_n = \frac{f^{(n)}(0)}{n!} =b_n$ である．
 \end{proof}
+
+\newpage
 
 \subsection{Taylor 展開}
 
@@ -3012,14 +3044,14 @@ $|u|> |b|$ と
   代表的なMaclaurin展開をいくつか挙げておく．
   \[
     \begin{aligned}
-      e^x &= \sum_{n=0}^{\infty} \frac{x^n}{n!} = 1 + x +
+      e^x &= \sum \frac{x^n}{n!} = 1 + x +
             \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots \quad (-\infty < x <
             \infty)\\
-      \sin x & = \sum_{n=0}^{\infty} (-1)^n \frac{x^{2n+1}}{(2n+1)!}
+      \sin x & = \sum (-1)^n \frac{x^{2n+1}}{(2n+1)!}
                = x - \frac{x^3}{3!} + \frac{x^5}{5!} -\frac{x^7}{7!} + \cdots \quad (-\infty < x < \infty)\\
-      \cos x &= \sum_{n=0}^{\infty} (-1)^n \frac{x^{2n}}{(2n)!}
+      \cos x &= \sum (-1)^n \frac{x^{2n}}{(2n)!}
                = 1 - \frac{x^2}{2!} + \frac{x^4}{4!}-\frac{x^6}{6!}+\cdots \quad (-\infty < x < \infty)\\
-      (1+x)^{a} &= \sum_{n=0}^{\infty} \binom{a}{n}x^n = 1 + \binom{a}{1}x + \binom{a}{2}x^2
+      (1+x)^{a} &= \sum \binom{a}{n}x^n = 1 + \binom{a}{1}x + \binom{a}{2}x^2
                   + \binom{a}{3}x^3 + \cdots \quad (-1 < x < 1)
         \end{aligned}
       \]
@@ -3031,20 +3063,20 @@ $|u|> |b|$ と
 
 
 \begin{example}\label{exmp:log-taylor}
-  例\ref{exmp:geo}のべき級数 $\ds \sum_{n=0}^{\infty} x^n$ の収束半径
+  例\ref{exmp:geo}のべき級数 $\sum  x^n$ の収束半径
   は $1$ である．従って，$|x|<1$ において
   \[
-    \frac{1}{1-x} = \sum_{n=0}^{\infty} x^n = 1 + x + x^2 + x^3 + \cdots 
+    \frac{1}{1-x} = \sum x^n = 1 + x + x^2 + x^3 + \cdots 
   \]
   である．べき級数展開の一意性（定理\ref{thm:unique-seriese}）からこれは関数 $
   f(x)=\dfrac{1}{1-x}$ のMaclaurin展開でもある．また，$|x|<1$ のと
   き，$|-x|<1$ だから
   \[
-    f(-x) = \frac{1}{1+x} = \sum_{n=0}^{\infty} (-x)^n = 1 -x + x^2 - x^3 + \cdots 
+    f(-x) = \frac{1}{1+x} = \sum (-x)^n = 1 -x + x^2 - x^3 + \cdots 
   \]
   であり，最右辺の収束半径は $1$ である．よって，項別積分ができて（定理\ref{thm:term-int}）
   \[
-    \log(1+x) = \int_{0}^{x} \frac{dt}{1+t} = \sum_{n=0}^{\infty} \frac{(-1)^n}{n+1} x^{n+1}
+    \log(1+x) = \int_{0}^{x} \frac{dt}{1+t} = \sum \frac{(-1)^n}{n+1} x^{n+1}
     = x - \frac{x^2}{2} + \frac{x^3}{3} - \frac{x^4}{4} + \cdots 
   \]
   が $|x|<1$ で成り立つ．これは関数 $\log(1+x)$ のMaclaurin展開である．
@@ -3060,16 +3092,16 @@ $|u|> |b|$ と
 
   例\ref{exmp:log-taylor}で見たように，$|x|<1$ で
   \[
-    \frac{1}{1+x} = \sum_{n=0}^{\infty} (-x)^n = 1 - x + x^2 - x^3 + \cdots
+    \frac{1}{1+x} = \sum (-x)^n = 1 - x + x^2 - x^3 + \cdots
   \]
   である．$|x| <1$ のとき，$|x^2|<1$ なので $x$ に $x^2$ を代入して
   \[
-    \frac{1}{1+x^2} = \sum_{n=0}^{\infty}(-x^2)^n=\sum_{n=0}^{\infty} (-1)^n x^{2n}
+    \frac{1}{1+x^2} = \sum(-x^2)^n=\sum (-1)^n x^{2n}
     =1 -x^2 + x^4 - x^6 + \cdots 
   \]
   を得る．この収束半径は $1$ である．よって，項別積分ができて（定理\ref{thm:term-int}）
   \[
-    \tan^{-1}x = \int_{0}^{x}\frac{dt}{1+t^2} = \sum_{n=0}^{\infty} \frac{(-1)^n}{2n+1}x^{2n+1}
+    \tan^{-1}x = \int_{0}^{x}\frac{dt}{1+t^2} = \sum \frac{(-1)^n}{2n+1}x^{2n+1}
     = x - \frac{x^3}{3} + \frac{x^5}{5} - \frac{x^7}{7} + \cdots
   \]
   が開区間 $(-1,1)$ で成り立つ．べき級数展開の一意性（定理\ref{thm:unique-seriese}）からこれ
