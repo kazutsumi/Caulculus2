@@ -1,0 +1,126 @@
+\documentclass[10pt, uplatex, dvipdfmx]{jsarticle}
+\usepackage{../mypackage} 
+
+\graphicspath{{../pictures}} 
+
+\setcounter{section}{10}
+
+\begin{document}
+
+\section{Gauss 積分と誤差関数}
+
+\subsection{Gauss 積分}
+
+以下の広義積分は\textbf{Gauss 積分}と呼ばれる．この値を広義2重積分を使って求める．
+\[
+  \int_{-\infty}^{\infty} e^{-x^2} \ dx
+\]
+
+\vspace{1zh}
+
+まず，この広義積分 $I$ が収束することを確認しておく．開区間上の広義積分の定義に従って
+\begin{equation}\label{eq:gauss-divide}
+  \int_{-\infty}^{\infty} e^{-x^2} \ dx  = \int_{-\infty}^{0} e^{-x^2} \ dx + \int_{0}^{\infty} e^{-x^2} \ dx
+\end{equation}
+と分けて，右辺の2個の広義積分がいずれも収束することを示す．ここで，$u=-x$ としての置換積分により
+\begin{equation}\label{eq:gauss-L}
+  \int_{-\infty}^{0} e^{-x^2} \ dx = \lim_{c \to -\infty} \int_{c}^{0} e^{-x^2} \ dx
+  = \lim_{c \to -\infty} \int_{-c}^{0} -e^{-u^2} \ du = \lim_{c \to \infty} \int_{0}^{-c} e^{-x^2} \ dx
+  =\int_{0}^{\infty} e^{-x^2} \ dx
+\end{equation}
+なので，(\ref{eq:gauss-divide})の右辺第2項が収束することを示せばよい．さらに，
+\begin{equation}\label{eq:gauss-R}
+  \int_{0}^{\infty} e^{-x^2} \ dx = \int_{0}^{1} e^{-x^2} \ dx + \int_{1}^{\infty} e^{-x^2} \ dx
+\end{equation}
+と分ければ，この右辺第1項は通常の積分なので第2項が収束することを示せばよい．$x \in [1, \infty)$ に対して
+\[
+  \left| e^{-x^2} \right| = e^{-x^2} \leqq x e^{-x^2}
+\]
+である．さらに，この最右辺の $[1,\infty)$ 上の広義積分は以下のように収束する．
+\[
+  \int_{1}^{\infty} x e^{-x^2} \ dx = \lim_{c \to \infty} \int_{1}^{c}
+  x e^{-x^2} \ dx = \lim_{c \to \infty} \left[
+    -\frac{e^{-x^2}}{2}\right]_{1}^{c} = \lim_{c \to \infty}
+  \frac{e^{-1} - e^{-c^2}}{2} = \frac{e^{-1}}{2}
+\]
+よって，(\ref{eq:gauss-R})の右辺第2項の
+広義積分は収束するので，Gauss 積分は収束する．\\
+
+上記の通り Gauss 積分は収束するので，以下が成り立つ．
+\[
+  \int_{-\infty}^{\infty} e^{-x^2} \ dx  = \lim_{n \to \infty} \int_{-n}^{n} e^{-x^2} \ dx
+\]
+なお，一般には
+\[
+  \int_{-\infty}^{\infty} f(x) \ dx \text{ と } \lim_{n \to \infty} \int_{-n}^{n} f(x) \ dx
+\]
+は別物だが，広義積分 $\ds \int_{-\infty}^{\infty} f(x) \ dx$ が収束する
+なら，両者は等しい．従って，以下が成り立つ．
+\begin{equation}\label{eq:gauss-square}
+  \begin{aligned}
+    \left( \int_{-\infty}^{\infty} e^{-x^2} \ dx \right)^2
+    &= \left( \lim_{n \to \infty} \int_{-n}^{n} e^{-x^2} \ dx \right)^2
+      = \lim_{n \to \infty} \left( \int_{-n}^{n} e^{-x^2} \ dx\right)^2\\[1ex]
+    & = \lim_{n \to \infty} \left( \int_{-n}^{n} e^{-x^2} \ dx \right) \left( \int_{-n}^{n} e^{-y^2} \ dy \right)
+      = \lim_{n \to \infty} \int_{-n}^{n} \left( \int_{-n}^{n} e^{-x^2-y^2} \ dx \right) dy\\[1ex]
+    &= \lim_{n \to \infty} \iint_{[-n,n] \times [-n,n]} e^{-x^2-y^2} \ dx dy
+  \end{aligned}
+\end{equation}
+ここで，$D_n = [-n,n] \times [-n,n]$ とおけ
+ば，$\Set{D_n}$ は $\mathbb{R}^2$ の増加近似列である．任意の $(x,y)
+\in \mathbb{R}^2$ に対して
+$e^{-x^2-y^2}>0$ なので，(\ref{eq:gauss-square})から以下が成り立つ．
+\begin{equation}
+  \left( \int_{-\infty}^{\infty} e^{-x^2} \ dx \right)^2 = \iint_{\mathbb{R}^2} e^{-x^2-y^2} \ dx dy
+\end{equation}
+この右辺の広義2重積分の値を求める．これが収束することは既にわかっている
+ので，$\mathbb{R}^2$ の増加近似列として計算しやすいものを選べばよい．
+\[
+  E_n = \Set{(x,y) \ \mid \ x^2+y^2 \leqq n^2}
+\]
+とすれば，$\Set{E_n}$ は $\mathbb{R}^2$ の増加近似列なので
+\[
+  \iint_{\mathbb{R}^2} e^{-x^2-y^2} \ dx dy = \lim_{n \to \infty} \iint_{E_n} e^{-x^2-y^2} \ dx dy
+\]
+である．極座標変換 $x=r\cos\theta, \; y=r\sin\theta$ によって，$r\theta$ 平面の閉領域
+\[
+  F_n = \Set{(r, \theta) \ \mid \ 0 \leqq r \leqq n, \; 0 \leqq \theta \leqq 2\pi}
+\]
+が $xy$ 平面の $E_n$ に変換される．極座標変換の Jacobian は $J(r,\theta)=r$ なので，
+\[
+  \begin{aligned}
+    \iint_{E_n} e^{-x^2-y^2} \ dx dy
+    &= \iint_{F_n} e^{-r^2} |J(r,\theta)| \ dr d\theta
+      = \int_{0}^{2\pi} \left( \int_{0}^{n} r e^{-r^2} \ dr \right) d\theta\\[1ex]
+    & = \left( \int_{0}^{2\pi} d\theta\right) \left( \int_{0}^{n} r e^{-r^2} \ dr\right)
+      = 2\pi \left[ -\frac{e^{-r^2}}{2}\right]_{0}^{n} = \pi \left( 1 - e^{-n^2}\right)
+  \end{aligned}
+\]
+である．よって，以下を得る．
+\[
+  \iint_{\mathbb{R}^2} e^{-x^2-y^2} \ dx dy = \lim_{n \to \infty} \pi \left( 1-e^{-n^2}\right) = \pi
+\]
+これと(\ref{eq:gauss-square})から
+$\ds \left( \int_{-\infty}^{\infty} e^{-x^2} \ dx \right)^2 = \pi$ であ
+り，明らかに $\ds \int_{-\infty}^{\infty} e^{-x^2} \ dx >0$ なので，Gauss積分の値は
+\begin{equation}\label{eq:gauss-int}
+  \fbox{$\ds \int_{-\infty}^{\infty} e^{-x^2} \ dx = \sqrt{\pi}$}
+\end{equation}
+である．さらに，(\ref{eq:gauss-divide})と(\ref{eq:gauss-L})から
+\[
+  \int_{-\infty}^{\infty} e^{-x^2} \ dx = 2 \int_{0}^{\infty} e^{-x^2} \ dx
+\]
+なので，(\ref{eq:gauss-int})と合わせて以下も得られる．
+\begin{equation}\label{eq:gauss-half}
+  \fbox{$\ds \int_{0}^{\infty} e^{-x^2} \ dx = \frac{\sqrt{\pi}}{2}$}
+\end{equation}
+次に紹介する誤差関数$\ds \erf x = \frac{2}{\sqrt{\pi}}\int_{0}^{x}
+e^{-t^2} \ dt$ に$\ds \frac{2}{\sqrt{\pi}}$ という定数が含まれているの
+はこの(\ref{eq:gauss-half})が理由である．つまり，$\ds \lim_{x \to
+  \infty} \erf x = 1$ となって欲しいからである．
+
+\newpage
+
+\subsection{誤差関数}
+
+\end{document}
