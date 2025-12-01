@@ -1,0 +1,510 @@
+\documentclass[10pt, uplatex, dvipdfmx]{jsarticle}
+\usepackage{../mypackage}
+
+\graphicspath{{../pictures}}
+
+\setcounter{section}{1}
+
+\begin{document}
+
+
+\section{積分とは}
+
+関数 $f$ の閉区間 $[a,b]$ 上の積分 $\ds \int_{a}^{b} f(x) \
+dx$ は，$F'=f$ となる関数 $F$ を見つけて
+\[
+  \int_{a}^{b} f(x) \ dx = F(b) - F(a)
+\]
+という計算によって求めることになる．こうして得られる値が何なのかを定義する．
+
+
+\subsection{Riemann 和}
+
+$f$ を有界閉区間 $[a,b]$ で定義された関数とする．区間 $[a,b]$ を $n$
+個に分割する．つまり，$[a,b]$ から端点を含めて $(n+1)$ 個の点を選ぶ．
+\[
+  a = x_0 < x_1 < x_2 < \cdots < x_{n-1} < x_n = b
+\]
+この $(n+1)$ 個の実数の組 $\Delta=(x_0, x_1, x_2, \ldots, x_n)$ を区
+間 $[a,b]$
+の\textbf{分割}と呼ぶ．各小区間から代表点$\xi_{i} \in [x_{i-1}, x_i]
+\; (i=1,2, \ldots, n)$ を選ぶ．このとき，
+\[
+  R\left( \Delta, \Set{ \xi_1, \xi_2, \ldots, \xi_n}, f\right):= \sum_{i=1}^{n} f(\xi_i)(x_i-x_{i-1})
+\]
+を分割 $\Delta$ と代表点集合 $\Set{\xi_1, \ldots, \xi_n}$ に関する関
+数 $f$ の\textbf{Riemann 和}という．
+
+ここで定義した Riemann 和は図\ref{fig:RiemannSum1}のように，横の長さ
+が $x_{i}-x_{i-1}$ で，縦の長さが $f(\xi_i)$ の細長い長方形たちの面積を
+足し合わせたものであり，$y=f(x)$ のグラフと $x$ 軸と直線 $x=a$ と$x=b$
+で囲まれた図形の面積を近似している．ただ
+し，$f(\xi_i)<0$ なら $f(\xi_i)(x_{i}-x_{i-1})<0$ なので，$x$ 軸より下
+にある部分の Riemann 和は負の値である．つまり，Riemann 和は\textbf{符号
+  付き面積}を近似している．
+\begin{figure}[h]
+  \centering
+  \includegraphics[height=6.5cm]{02/RiemannSum.pdf}
+  \caption{Riemann 和 $\ds \sum_{i=1}^{n} f(\xi_i)(x_i-x_{i-1})$ は各長
+    方形の（符号付き）面積の和に相当する． }\label{fig:RiemannSum1}
+\end{figure}
+
+\newpage
+
+簡単な Riemann 和を実際に計算してみよう．
+
+\begin{example}
+  $f(x)=x^2$ とする．$\Delta=(x_0,x_1,x_2,x_3,x_4)$ を閉区
+  間 $[0,4]$ の $4$ 等分割とし，各小区間 $[ x_{i-1}, x_{i}]$ の中点
+  を $\xi_i$ とする．つまり，
+  \[
+    \Delta=(x_0, x_1, x_2, x_3, x_4) =(0,1,2,3,4), \quad
+    \xi_1=\frac{1}{2}, \; \xi_2=\frac{3}{2}, \; \xi_3=\frac{5}{2}, \;
+    \xi_4 = \frac{7}{2}
+  \]
+  とする．これらに関する $f$ の Riemann 和 $R(\Delta, \{\xi_i\}, f)$ を実際に計算してみよう．
+  \[
+    \begin{aligned}
+      R\left( \Delta, \{\xi_i\}, f\right)
+      &=f(\xi_1)(x_1-x_0)+f(\xi_2)(x_2-x_1) + f(\xi_3)(x_3-x_2) +
+        f(\xi_4)(x_4-x_3)\\[2ex]
+      &= f\left(\frac{1}{2}\right) \left( 1-0 \right) + f\left(\frac{3}{2}\right)\left(2-1\right)
+        + f\left(\frac{5}{2}\right) \left(3-2\right) + f\left(\frac{7}{2}\right)\left(4-3\right)\\[2ex]
+      & = \frac{1}{4} + \frac{9}{4} + \frac{25}{4} + \frac{49}{4} = 21
+    \end{aligned}
+  \]
+\begin{figure}[h]
+  \centering
+  \includegraphics[height=12cm]{02/parabola.pdf}
+\end{figure}
+
+これは積分 $\ds \int_{0}^{4}x^2 \ dx $ を近似している．実際，後で確認す
+るが $\ds \int_{0}^{4} x^2 \ dx = \frac{64}{3} = 21.333\cdots$ である．
+\end{example}
+
+\newpage
+
+
+\subsection{積分の定義}
+
+$f$ を有界閉区間 $[a,b]$ で有界な関数とする．$[a,b]$ の分
+割 $\Delta =(x_0, \ldots, x_n)$ に対し，
+\[
+  |\Delta| := \max_{1 \leq i \leq n}(x_i - x_{i-1})
+\]
+とする．ここで，$\max$は最大値を意味する．すなわち，$x_1-x_0, x_2-x_1,
+\ldots, x_{n}-x_{n-1}$ の中で最も大きな値が $|\Delta|$ であ
+る．$|\Delta| \to 0$ のとき，分割の仕方と代表点集合 $\Set{\xi_i}$の選び
+方によらず Riemann 和 $R(\Delta, \Set{\xi_i}, f)$ が一定の値に収束する
+ならば，$f$ は $[a,b]$ で\textbf{(Riemann) 積分可能}，また
+は\textbf{(Riemann) 可積分}であるといい，その極限値を
+\[
+  \int_{a}^{b} f(x) \ dx
+\]
+で表し，区間 $[a,b]$ における $f$ の\textbf{積分}という．つまり，
+\[
+  \int_{a}^{b} f(x) \ dx = \lim_{|\Delta| \to 0} \sum_{i=1}^{n} f(\xi_i)(x_i-x_{i-1})
+\]
+である．ここまでは $a<b$ の場合しか想定していないが，$a \geqq b$ の場合も含めて以下を約束しておく．
+\begin{equation}\label{eq:int_promis}
+  \int_{a}^{b} f (x) \ dx = - \int_{b}^{a} f(x) \ dx, \qquad \int_{a}^{a} f(x) \ dx =0
+\end{equation}
+
+
+与えられた関数が積分可能であるかどうかを調べるのは容易ではないが，有界
+閉区間上の連続関数は積分可能であることが知られている．
+
+\begin{theorem}\label{thm:integrable1}
+  有界閉区間 $[a,b]$ 上連続な関数は $[a,b]$ で積分可能である．
+\end{theorem}
+
+つまり，積分したい区間で $f$ が連続なら積分できるかどうかは心配する必要
+がなく，「どうやって計算するか」のみ考をえればよい．\\
+
+積分の定義から，以下の定理が成り立つ．
+
+\begin{theorem}\label{thm:int_additive}
+  $f$ の積分可能な範囲内にある任意の $a,b,c$ に対して以下が成り立つ．
+  \[
+    \int_{a}^{b} f(x) \ dx + \int_{b}^{c} f(x) \ dx = \int_{a}^{c} f(x) \ dx
+  \]
+\end{theorem}
+
+\begin{theorem}\label{thm:int_monotomic}
+  $f,g$ が区間 $[a,b]$ で積分可能かつ $f(x) \leqq g(x)$ なら $\ds \int_{a}^{b}f(x) \ dx \leqq \int_{a}^{b} g(x) \ dx$ である．
+\end{theorem}
+
+一般に，$- |f(x)| \leqq f(x) \leqq | f(x) |$ なので定理\ref{thm:int_monotomic}から以下が成り立つ．
+\[
+  -\int_{a}^{b} |f(x)| \ dx \leqq \int_{a}^{b} f(x) \ dx \leqq \int_{a}^{b} |f(x)| \ dx
+\]
+これにより，以下の定理が得られる．
+
+\begin{theorem}\label{thm:int_absolute}
+  $f$ が $[a,b]$ で積分可能なら $\ds \left| \int_{a}^{b} f(x) \ dx \right| \leqq \int_{a}^{b} |f(x)| \ dx$ である．
+\end{theorem}
+
+\subsection{微分積分学の基本定理}
+
+積分値を定義に基づいて求めるのは大体困難であり，実際には微分積分学の基本定理を使って計算する．
+
+\begin{theorem}[\textbf{微分積分学の基本定理}]\label{thm:fundamental}
+  有界閉区間 $[a,b]$ 上の連続関数 $f$ に対して次が成り立つ．
+  \begin{enumerate}[(1)]
+  \item 関数 $\ds G(x) = \int_{a}^{x} f(t) \
+    dt$ は閉区間 $[a,b]$ で定義され，開区間 $(a,b)$ で以下が成り立つ．
+    \[
+      G'(x)= f(x)
+    \]
+    つまり，$G$ は $f$ の原始関数である．
+    
+  \item $f$ の任意の原始関数 $F$ に対して（つまり，$F'=f$ となる任意の $F$ に対して）以下が成り立つ．
+    \[
+      \int_{a}^{b} f(x) \ dx = F(b) - F(a)
+    \]
+  \end{enumerate}
+\end{theorem}
+
+\begin{remark}
+  この定理の(1)は，微分と積分という操作が互いに逆であることを示している．
+  これがあるから「微分学」と「積分学」がまとめて「微分積分学」と呼ばれ
+  ている．また，(2)は微分の逆操作によって実際に積分の値が計算できること
+  を示している．この定理は微分積分学においてもっとも重要
+  であり，だからこそ「基本定理」と呼ばれている．\\
+\end{remark}
+
+$F(b)-F(a)$ を $\Big[ F(x) \Big]_{a}^{b}$ と書くと便利である．これによって積分の計算は
+\[
+  \int_{a}^{b}f(x) \ dx = \Big[F(x)\Big]_{a}^{b} = F(a) - F(b) = \cdots 
+\]
+という形で書かれることが多い．\\
+
+例えば，$\ds \left( \frac{x^3}{3} \right)' = x^3, \; \left( e^x \right)' = e^x$ なので
+微分積分学の基本定理(2)から
+\[
+  \int_{0}^{4} x^2 \ dx = \left[ \frac{x^3}{3} \right]_{0}^{4} = \frac{4^3}{3} - \frac{0^3}{3} = \frac{64}{3}, \qquad
+  \int_{0}^{1} e^x \ dx = \left[ e^x \right]_{0}^{1} = e^1 - e^0 = e-1
+\]
+などと積分の計算が容易に行える．とにかく，$F'=f$ となる $F$ さえ見つかれば積分は容易に計算できる．\\
+
+また，$F'=f$ となる $F$
+はどれを選んでもよい．例えば，$\ds \left( \log x \right)' = \left(
+  \log (2x) \right)' = \frac{1}{x}$ なので
+\[
+  \int_{1}^{2} \frac{dx}{x} = \Big[ \log x \Big]_{1}^{2} = \log 2 - \log 1 = \log 2 \quad \Big( F(x) = \log x\Big)
+\]
+と計算しても
+\[
+  \int_{1}^{2} \frac{dx}{x} = \Big[\log(2x) \Big]_{1}^{2} = \log 4 - \log 2 = \log\frac{4}{2} = \log 2 \quad
+  \Big( F(x) = \log (2x) \Big)
+\]
+と計算してもよい．ちなみに，$\log (2x) = \log x + \log 2$ なので，$\log x$ と $\log (2x)$ との差は定数 $\log 2$ である．
+
+\subsection{定積分における部分積分と置換積分}
+
+微分積分学の基本定理により，定積分 $\ds \int_{a}^{b} f(x) \ dx$ の計算
+の大部分は実質不定積分 $\ds \int f(x) \ dx$ の計算である．そこに部分積分や
+置換積分を適用する場合には積分範囲も含めて計算すればよい．\\
+
+定積分で部分積分を適用する場合は，以下のように計算すればよい．
+\[
+  \int_{a}^{b} f(x)g'(x) \ dx = \Big[ f(x) g(x) \Big]_{a}^{b} - \int_{a}^{b} f'(x) g(x) \ dx
+\]
+
+\begin{example}
+
+  \begin{enumerate}[(1)]
+    \setlength{\itemsep}{1zh}
+    
+  \item $\ds \int_{0}^{1} x e^x \ dx = \Big[ x e^x \Big]_{0}^{1} - \int_{0}^{1} e^x \ dx = e -0 - \Big[ e^x \Big]_{0}^{1} =
+    e - \left( e-1\right) = 1$
+
+  \item
+    $\ds \int_{1}^{2} x \log x \ dx = \left[ \frac{x^2}{2} \log x
+    \right]_{1}^{2} - \int_{1}^{2} \frac{x}{2} \ dx = 2 \log 2 - 0 -
+    \left[ \frac{x^2}{4} \right]_{1}^{2} = 2 \log 2 - \left( 1 -
+      \frac{1}{4}\right) = 2 \log 2 - \frac{3}{4}$
+  \end{enumerate}
+  
+\end{example}
+
+\begin{remark}
+  先に不定積分を計算しきってもよい．例えば，上の(1)で
+  $\ds \int x e^x \ dx = x e^x - \int e^x \ dx = x e^x - e^x$ と不定積
+  分を求めてしまってから以下のように計算してもよい．
+  \[
+    \int_{0}^{1} x e^x \ dx = \Big[ x e^x - e^x\Big]_{0}^{1} = (e-e) - (0 - 1) = 1
+  \]
+  これでももちろんよいが，$\ds \int$ が外れたところから代入計算をした方が早く結論に辿りつきやすい．\\
+\end{remark}
+
+定積分において，$u=g(x)$ として置換積分を適用する場合には，積分範囲も $u$ の動く範囲に変換する．
+\[
+  \int_{a}^{b} f\left( g(x) \right) \frac{du}{dx} \ dx = \int_{\alpha}^{\beta} f(u) \ du \quad \left[
+    \begin{array}{c|ccc}
+      x & a & \to & b \\ \hline
+      u & \alpha & \to & \beta
+    \end{array}
+    \right]
+\]
+
+\begin{example}
+  $\ds \int_{0}^{\pi/2} \frac{\cos x}{1+\sin x} \ dx$
+  
+  $u=1+\sin x$ とおくと $\ds \frac{du}{dx} = \cos x$ であり，積分範囲は $
+  \begin{array}{c|ccc}
+    x & 0 & \to & \pi/2 \\ \hline
+    u & 1 & \to & 2
+  \end{array}$ と変換される．
+  \[
+    \int_{0}^{\pi/2} \frac{\cos x}{1+\sin x} \ dx = \int_{0}^{\pi/2} \frac{1}{u}~ \frac{du}{dx} \ dx
+    = \int_{1}^{2} \frac{du}{u} = \Big[ \log u \Big]_{1}^{2} = \log 2
+  \]
+\end{example}
+
+\begin{remark}
+  上の例で，先に不定積分を
+  $\ds \int \frac{\cos x}{1+\sin x} \ dx = \int \frac{du}{u} = \log |u| = \log |1+\sin x|$ と計算しきってから
+  \[
+    \int_{0}^{\pi/2} \frac{\cos x}{1+\sin x} \ dx = \Big[ \log |1+\sin x| \Big]_{0}^{\pi/2}
+    = \log 2 - \log 1 = \log 2
+  \]
+  と計算してももちろんよいが，積分範囲も変換しながら計算すれば，不定積分を計算しきる必要がなくなる．
+\end{remark}
+
+
+具体的な積分計算は以下のリンク先の「積分基本問題集 壱」(1) $\sim$ (26) で練習してください．
+\begin{center}
+  \url{https://github.com/kazutsumi/Integral1/blob/main/integral1.pdf}
+\end{center}
+
+
+
+\subsection{微分積分学の基本定理の証明}
+
+微分積分学の基本定理（定理\ref{thm:fundamental}）は微分積分学において最
+も重要な定理なのでその証明を書いておく．興味がなければ読み飛ばしてもよ
+い．なお，基本的に教科書と同じ証明である．
+
+\begin{fundamental}
+  有界閉区間 $[a,b]$ 上の連続関数 $f$ に対して次が成り立つ．
+  \begin{enumerate}[(1)]
+  \item 関数 $\ds G(x) = \int_{a}^{x} f(t)\ dt$ は閉区間 $[a,b]$ で定義され，開区間 $(a,b)$ で以下が成り立つ．
+    \[
+      G'(x) = f(x)
+    \]
+    
+  \item $f$ の任意の原始関数 $F$ に対して以下が成り立つ．
+    \[
+      \int_{a}^{b} f(x) \ dx = F(b) - F(a)
+    \]
+  \end{enumerate}
+\end{fundamental}
+
+\vspace{1zh}
+
+まず，(1)を認めてしまえば以下の補題\ref{lem:uptoC}から(2)は容易に示せる．
+
+\begin{lemma}\label{lem:uptoC}
+  $F,G$ を有界閉区間 $[a,b]$ 上の連続関数 $f$ の原始関数とする．このと
+  き，$F(x) = G(x) +C$ となる定数 $C$ が存在する．
+\end{lemma}
+
+\begin{proof}
+  $H(x) = F(x) - G(x)$ とする．$H'(x) = F'(x) - G'(x) = f(x) - f(x) =
+  0$ なので，$H$ は $[a,b]$ 上の定数関数である．実際，平均値の定理から
+  任意の $x_1 ,x_2 \in [a,b] \; ( x_1 < x_2)$ に対して
+  \[
+    \frac{H(x_2) - H(x_1)}{x_2-x_1} = H'(c) , \quad x_1 < c < x_2
+  \]
+  となる実数 $c$ が存在するが，$H'(c)=0$ なので $H(x_1) =
+  H(x_2)$ より $H$ は定数関数である．よって，$H(x) = F(x) - G(x) = C$
+  となる定数 $C$ が存在する．これより，$F(x) = G(x) +C$ である．
+\end{proof}
+
+\vspace{1zh}
+
+\begin{proof}[微分積分学の基本定理(2)の証明]
+  (1)から $G(x)$ は $f$ の原始関数なので，補
+  題\ref{lem:uptoC}から $F(x) = G(x) +C$ を満たす定数 $C$ が存在する．
+  また，$\ds \int_{a}^{a} f(t) \ dt =0$ と約束しているので
+  \[
+    F(b) - F(a) = \Big(G(b) +C \Big) - \Big(G(a) +C\Big) = G(b) - G(a)
+    = \int_{a}^{b} f(t) \ dt - \int_{a}^{a} f(t) \ dt = \int_{a}^{b} f(x) \ dx
+  \]
+  である．なお，変数に使う文字によって積分値は変わらないので
+  $\ds \int_{a}^{b} f(t) \ dt = \int_{a}^{b} f(x) \ dx$ である．
+\end{proof}
+
+\newpage
+
+次に，定理\ref{thm:int_additive}と以下の補題\ref{lem:int_average}から微分積分学の基本定理(1)を証明する．
+
+\begin{lemma}[\textbf{積分の平均値の定理}]\label{lem:int_average}
+  有界閉区間 $[a,b]$ 上の連続関数 $f$ に対し，以下を満たす実数 $c$ が存在する．
+  \[
+    \int_{a}^{b}f(x) \ dx = f(c)(b-a), \quad a < c < b
+  \]
+\end{lemma}
+
+\begin{proof}
+  $f$ が定数関数なら明らかなので，$f$ は定数関数でないとする．$f$ は閉
+  区間 $[a,b]$ で連続なので最小値 $m$ と最大値 $M$ が存在する．それらを
+  実現する値をそれぞれ $x_{\min}, x_{\max} \in [a,b]$ とする．つま
+  り，$f(x_{\min})=m, \; f(x_{\max})=M$ である．$f$ は定数関数でないの
+  で $x_{\min} \neq x_{\max}$ である．定理\ref{thm:int_monotomic}より
+  \[
+    m(b-a) = \int_{a}^{b} m \ dx \leqq \int_{a}^{b} f(x) \ dx \leqq \int_{a}^{b} M \ dx = M (b-a)
+  \]
+  が成り立つ．これより
+  \[
+    m \leqq \frac{1}{b-a} \int_{a}^{b} f(x) \ dx \leqq M
+  \]
+  である．よって，中間値の定理から
+  \[
+    \frac{1}{b-a} \int_{a}^{b} f(x) \ dx = f(c), \quad x_{\min} < c < x_{\max} \text{ または } x_{\max} < c < x_{\min}
+  \]
+  を満たす実数 $c$ が存在する．従って，
+  \[
+    \int_{a}^{b} f(x) \ dx = f(c) (b-a)
+  \]
+  である．ここで，$x_{\min}, x_{\max} \in [a,b]$ なので $a < c < b$ である．
+\end{proof}
+
+\vspace{1zh}
+
+\begin{proof}[微分積分学の定理(1)の証明]
+  $x \in (a,b)$ とする．定理\ref{thm:int_additive}と約束 (\ref{eq:int_promis}) から
+  \[
+    \begin{aligned}
+      \frac{G(x+h) - G(x)}{h}
+      &= \frac{1}{h}\left(\int_{a}^{x+h}f(t) \ dt - \int_{a}^{x} f(t) \ dt\right)
+        \underset{(\ref{eq:int_promis})}{=}\frac{1}{h} \left( \int_{a}^{x+h} f(t) \ dt + \int_{x}^{a} f(t) \ dt \right)\\
+      &\underset{\text{定理\ref{thm:int_additive}}}{=} \frac{1}{h} \int_{x}^{x+h} f(t) \ dt
+    \end{aligned}
+  \]
+  である．さらに，補題\ref{lem:int_average}から
+  \[
+    \int_{x}^{x+h} f(t) \ dt = f(c)h
+  \]
+  を満たす実数 $c$ が $x$ と $x+h$ の間に存在するので
+  \[
+    \frac{G(x+h) - G(x)}{h} = f(c)
+  \]
+  である．$h \to 0$ のとき $c \to x$ であり，$f$ は連続なので
+  \[
+    G'(x) = \lim_{h \to 0} \frac{G(x+h)-G(x)}{h} = \lim_{c \to x} f(c) = f(x)
+  \]
+  である．つまり，$G$ は開区間 $(a,b)$ で微分可能で $G'(x) = f(x)$ である．
+\end{proof}
+\newpage
+
+\subsection{（おまけ）Riemann 和の極限としての積分}\label{sec:Rsum_computation}
+有界閉区間上の連続関数の積分の値を Riemann 和の極限としていくつか計算する．
+
+\begin{example}
+$\ds \int_{0}^{4} x^2 \ dx$ 
+
+  \vspace{1zh}
+
+  $\Delta_n=(x_0, \ldots, x_n)$ を閉区間 $[0,4]$ の $n$ 等分割，各小区間 $[x_{i-1}, x_i]$
+  の中点を代表点 $\xi_i$ とする．つまり，
+  \[
+    x_i = \frac{4i}{n} \; (i=0,1, \ldots, n) , \qquad \xi_i =
+    \frac{x_{i-1} + x_{i}}{2} = \frac{2(2i-1)}{n} \; (i=1,2, \ldots, n)
+  \]
+  とする．これらに関する $f(x) =
+  x^2$ の Riemann 和を $S_n$ とする．これは図\ref{fig:Rsum_quadratic}の灰色部分の面
+  積に等しい．
+  \begin{figure}[h]
+    \centering
+    \includegraphics[height=8cm]{02/quadratic.pdf}
+    \caption{}\label{fig:Rsum_quadratic}
+  \end{figure}
+  $n \to \infty$ のとき，$|\Delta_n| \to 0$ だから定理\ref{thm:integrable1}より $S_n$ は
+  収束し，その極限値が求める積分値である．
+
+  Riemann 和 $\ds S_n $ を具体的に計算する．$\Delta_n$ は区間 $[0,4]$ の $n$ 等
+  分割なので，各 $i$ で $\ds x_{i} - x_{i-1} = \frac{4}{n}$ である．
+  \[
+    \begin{aligned}
+      S_n &= \sum_{i=1}^{n} f(\xi_i)(x_i - x_{i-1})
+            = \sum_{i=1}^{n} \left( \frac{2(2i-1)}{n}\right)^2 \cdot \frac{4}{n}
+            =\frac{16}{n^3}\sum_{i=1}^{n} (2i-1)^2
+            = \frac{16}{n^3} \sum_{i=1}^{n} \left(4i^2-4i+1\right)\\[2ex]
+          &  = \frac{16}{n^3} \left( 4 \sum_{i=1}^{n} i^2 - 4 \sum_{i=1}^{n} i + \sum_{i=1}^{n} 1\right)
+            = \frac{16}{n^3} \left( 4 \cdot \frac{n(n+1)(2n+1)}{6} - 4 \cdot \frac{n(n+1)}{2} + n\right)\\[2ex]
+          &= 16 \left( \frac{2}{3} \left( 1 + \frac{1}{n}\right)\left(2+\frac{1}{n}\right)
+            - \frac{2}{n} \left(1+\frac{1}{n}\right) + \frac{1}{n^2}\right) \to \frac{64}{3} \; (n \to \infty)
+    \end{aligned}
+  \]
+  これより，$\ds \int_{0}^{4}x^2 \ dx = \lim_{n \to \infty} S_n = \frac{64}{3}$ である．
+\end{example}
+
+\newpage
+
+\begin{example}
+  $\ds \int_{0}^{1} e^x \ dx$ 
+
+  \vspace{1zh}
+  
+  $\Delta_n=(x_0,\ldots, x_n)$ を閉区間 $[0,1]$ の $n$ 等分割，各小区間 $[x_{i-1},x_i]$ の
+  右端 $x_i$ を代表点 $\xi_i$ とする．つまり，
+  \[
+    x_i = \xi_i = \frac{i}{n}
+  \]
+  とする．これらに関する $f(x) = e^x$ の Riemann和を $S_n$ とする．こ
+  れは図\ref{fig:Rsum_exp}の灰色部分の面積に等しい．$n \to \infty$ のと
+  き，$|\Delta_n| \to 0$ だから定理\ref{thm:integrable1}より $S_n$ は収束し，その極限値が求める積分
+  値である．
+  \begin{figure}[h]
+    \centering
+    \includegraphics[height=8cm]{02/exp.pdf}
+    \caption{}\label{fig:Rsum_exp}
+  \end{figure}
+\end{example}
+
+Riemann 和 $S_n$ を具体的に計算する．$\Delta_n$ は区間 $[0,1]$ の $n$ 等分割な
+ので，各 $i$ で $\ds x_i-x_{i-1} = \frac{1}{n}$ である．
+\[
+  \begin{aligned}
+    S_n &= \sum_{i=1}^{n} f(\xi_i) (x_i-x_{i-1}) = \sum_{i=1}^{n} e^{\frac{i}{n}} \cdot \frac{1}{n}\\[2ex]
+        & = \frac{1}{n} \left( e^{\frac{1}{n}}
+          + \left(e^{\frac{1}{n}}\right)^2 + \left( e^{\frac{1}{n}}\right)^3 +\cdots
+          + \left( e^{\frac{1}{n}}\right)^n\right) \quad \left( \text{ 公比 $e^{\frac{1}{n}}$ の等比級数}\right)\\[2ex]
+        & = \frac{1}{n} \cdot \frac{e^{\frac{1}{n}} \left( 1 - \left( e^{\frac{1}{n}}\right)^n\right)}{1-e^{\frac{1}{n}}}
+          = \frac{e^{\frac{1}{n}}}{n} \cdot \frac{e-1}{e^{\frac{1}{n}}-1}
+  \end{aligned}
+\]
+ここで，$\ds t=e^{\frac{1}{n}}-1$ とおく．これにより $\ds \frac{1}{n} = \log(1+t)$ なので，
+\[
+  S_n = \frac{\log(1+t)}{t} \cdot (e-1)(t+1) = (e-1) (t+1) \log(1+t)^{\frac{1}{t}}
+\]
+と変形できる．$n \to \infty$ のとき $t \to +0$ なので，$\ds \lim_{t \to +0} \log (1+t)^{\frac{1}{t}}=1$ と合わせて以下を得る．
+\[
+  \int_{0}^{1} e^x \ dx = \lim_{n \to \infty} S_n = (e-1) \lim_{t\to +0} (t+1) \log (1+t)^{\frac{1}{t}} = e-1
+\]
+
+
+定数関数 $f(x) = C$ は連続関数だが，定理\ref{thm:integrable1}に頼ることなく直接積分を計算できる．
+\begin{example}
+  $\ds \int_{a}^{b} C \ dx$\\
+
+  $\Delta = (x_0, \ldots, x_n)$ を閉区間 $[a,b]$ の任意の分割とし，各小
+  区間の $[x_{i-1}, x_{i}]$ の代表点 $\xi_i$ を任意に選ぶ．これらに関す
+  る $f(x) = C$ の Riemann 和は
+  \[
+    \begin{aligned}
+      R(\Delta, \{\xi_i\}, f) &= \sum_{i=1}^{n} f(\xi_i) (x_i - x_{i-1}) = \sum_{i=1}^{n} C (x_{i}-x_{i-1})\\[2ex]
+                              & = C \Big( (x_1-x_0) + (x_2-x_1) + \cdots + (x_n-x_{n-1}) \Big)
+                                = C(x_n-x_0) = C(b-a)
+    \end{aligned}
+  \]
+  である．よって，分割の仕方と代表点の選び方によらず Riemann 和は一定な
+  ので，特に $|\Delta|\to 0$ における極限値もその一定の値に等しい．よっ
+  て，$\ds \int_{a}^{b} C \ dx = \lim_{|\Delta| \to 0} R(\Delta, \{\xi_i\}, f) = C(b-a)$ である．
+\end{example}
+
+
+
+\end{document}

@@ -1,0 +1,413 @@
+\documentclass[10pt, uplatex, dvipdfmx]{jsarticle}
+\usepackage{../mypackage}
+
+\graphicspath{{../pictures}}
+
+\setcounter{section}{3}
+
+\begin{document}
+
+\section{広義積分}\label{sec:imporper}
+
+これまでの積分は有界閉区間上の有界な関数のみを対象にしてきた．その制
+限を除き，（半）開区間や無限区間上の有界とは限らない関数の積分を定義
+する．
+
+
+\subsection{広義積分の定義}
+
+\begin{definition}
+  $f$ を半開区間 $[a,b) \; (b=\infty \text{でもよいが，その場合は半開
+    区間とは呼ばないかも})$ で定義された1変数関数とし，任意
+  の $c \in [a,b)$ 対し有界閉区間 $[a,c]$ で $f$ は有界で積分可能である
+  とする．このとき，
+  \[
+    \int_{a}^{b} f(x) \ dx := \lim_{c \to b-0} \int_{a}^{c} f(x) \ dx
+    \quad \left(b =\infty \text{ なら }\int_{a}^{\infty} f(x) \ dx := \lim_{c \to \infty}
+      \int_{a}^{c} f(x) \ dx\right)
+  \]
+  を $f$ の半開区間 $[a,b)$ における\textbf{広義積分}という．極限が存在
+  するとき広義積分は\textbf{収束する}といい，極限が存在しないとき
+  は\textbf{発散する}という．
+
+  同様にして，半開区間 $(a,b]\; (a=-\infty
+  \text{でもよいが，半開区間とは呼ばないかも})$ における広義積分を
+  \[
+    \int_{a}^{b} f(x)\ dx := \lim_{c \to a+0} \int_{a}^{b} f(x) \ dx
+    \quad \left( a = -\infty \text{ なら } \int_{-\infty}^{b} f(x) \
+      dx := \lim_{c \to -\infty}  \int_{c}^{b} f(x) \
+      dx\right)
+  \]
+  により定義する．このとき，$f$ は任意の $c \in (a,b]$ に対し有界閉区
+  間 $[a,c]$ で有界で積分可能な関数とし，広義積分の収束・発散も同様に定
+  義する．
+  
+  また，開区間 $(a,b) \; (a=-\infty \text{ や } b=\infty \text{でもよ
+    い})$ で定義された関数 $f$ に対して，任意に $c \in (a,b)$ をとり
+  \[
+    \int_{a}^{b} f(x) \ dx := \int_{a}^{c} f(x)\ dx + \int_{c}^{b} f(x)\ dx
+  \]
+  により $f$ の開区間 $(a,c)$ における広義積分を定義する．このとき，右
+  辺の2つの広義積分が共に収束するとき，左辺の広義積分は収束すると定義し，
+  右辺のどちらか一方でも発散すれば左辺の広義積分も発散すると定義する．
+  この広義積分が収束するとき，その値は $c$ によらない．
+
+  関数が定義されない点が区間の内部に存在する場合は，区間をその点で分け
+  て広義積分を定義する．例えば，関数 $f$ が$x=c \in (a,b)$ で定義されないなら
+  \[
+    \int_{a}^{b} f(x) \ dx := \int_{a}^{c} f(x) \ dx + \int_{c}^{b} f(x) \ dx
+  \]
+  により定義する．先程と同様に右辺の両方の広義積分が収束するときのみ左辺も収束すると定義する．
+\end{definition}
+
+\begin{example}
+  \[
+    \int_{0}^{\infty} e^{-x}\ dx = \lim_{c \to \infty} \int_{0}^{c} e^{-x}\ dx
+    = \lim_{c \to \infty} \Big[-e^{-x}\Big]_{0}^{c} 
+    = \lim_{c \to \infty} \left( -e^{-c} + 1\right) = 1
+  \]
+\end{example}
+
+\begin{example}
+  \[
+    \int_{-\infty}^{0} e^{-x} \ dx = \lim_{c \to -\infty}
+    \int_{c}^{0} e^{-x} \ dx = \lim_{c \to -\infty} \Big[ -e^{-x} \Big]_{c}^{0}
+    = \lim_{c \to -\infty} \left( -1 + e^{-c}\right) = \infty \; \left( \text{ 発散 } \right)
+  \]
+\end{example}
+
+\begin{example}
+  \[
+    \int_{0}^{1} \frac{dx}{\sqrt{1-x^2}} = \lim_{c \to 1-0}  \int_{0}^{c} \frac{dx}{\sqrt{1-x^2}}
+    = \lim_{c \to 1-0} \Big[ \sin^{-1} x \Big]_{0}^{c} = \lim_{c \to 1-0} \sin^{-1}c 
+    = \frac{\pi}{2}
+  \]
+\end{example}
+
+
+\subsection{広義積分の収束・発散の判定}
+
+広義積分の値はいつでもその値を計算できるとは限らないが，収束・発散の判
+定だけならできることがある．
+
+\begin{theorem}\label{thm:convergent}
+  $f,g$ を区間 $[a, b)$ で $|f(x)| \leq g(x)$ を満たす1変数関数で，任意
+  の $c \in [a,b)$ に対して $[a,c]$ で積分可能とする．このとき，広義積
+  分 $\ds \int_{a}^{b} g(x)\ dx$ が収束するなら広義積分 $\ds \int_{a}^{b}
+  f(x) \ dx$ も収束し，以下が成り立つ．
+  \[
+    \left| \int_{a}^{b} f(x)\ dx \right| \leq \int_{a}^{b} g(x)\ dx
+  \]
+\end{theorem}
+
+\begin{theorem}\label{thm:divergent}
+  $f,g$ を区間 $[a,b)$ で $f(x) \leq g(x)$ を満たす1変数関数で，任意
+  の $c \in [a,b)$ に対して $[a,c]$ で積分可能とする．このとき，
+  \[
+    \int_{a}^{b} f(x) \ dx = +\infty \text{ ならば } \int_{a}^{b} g(x) \ dx = +\infty
+  \]
+  であり，
+  \[
+    \int_{a}^{b} g(x)\ dx = -\infty \text{ ならば } \int_{a}^{b} f(x)\ dx = -\infty
+  \]
+  である．
+\end{theorem}
+
+\begin{remark}
+  定理\ref{thm:convergent}, \ref{thm:divergent}は区間が $(a,b], (a,b)$
+  の場合（無限区間でもよい）に対しても成り立つ．
+\end{remark}
+
+
+\begin{example}
+  広義積分 $\ds \int_{0}^{\infty} \frac{\sin x}{(x+1)(x+2)}\ dx$ は収束する．
+  
+  \begin{proof}
+    区間 $[0, \infty)$ において
+    \[
+      \left|\frac{\sin x}{(x+1)(x+2)}\right| \leq \frac{1}{(x+1)^2}
+    \]
+    であり，任意の $c \in [0, \infty)$ に対して
+    $\ds \frac{\sin x}{(x+1)(x+2)}, \, \frac{1}{(x+1)^2}$ は $[0,c]$ で
+    連続なので積分可能である．さらに，
+    \[
+      \int_{0}^{\infty} \frac{dx}{(x+1)^2} = \lim_{b \to \infty} \int_{0}^{b} \frac{dx}{(x+1)^2}
+      = \lim_{b \to \infty} \left[ -\frac{1}{x+1}\right]_{0}^{b}
+      =\lim_{b \to \infty}\left( -\frac{1}{b+1} +1\right) =1
+    \]
+    より，定理\ref{thm:convergent}から広義積分
+    $\ds \int_{0}^{\infty}\frac{\sin x}{(x+1)(x+2)}\ dx$ は収束する．
+  \end{proof}
+\end{example}
+
+\begin{example}
+  広義積分 $\ds \int_{1}^{\infty} \frac{dx}{1+\log x}$ は $+\infty$ に発散する．
+
+  \begin{proof}
+    区間 $[1,\infty)$ において
+    \[
+      \frac{1}{1+x} < \frac{1}{1+\log x}
+    \]
+    であり，任意の $c \in [1, \infty)$ に対して
+    $\ds \frac{1}{1+x}, \, \frac{1}{1+\log x}$ は $[1, c]$ で連続なので積分可能であ
+    る．さらに，
+    \[
+      \int_{1}^{\infty} \frac{dx}{1+x} = \lim_{b \to \infty} \int_{1}^{b} \frac{dx}{1+x}
+      =\lim_{b \to \infty} \left[ \log (1+x) \right]_{1}^{b}
+      = \lim_{b \to \infty} \left( \log(1+b) - \log 2\right) = +\infty
+    \]
+    より，定理\ref{thm:divergent}から広義積分
+    $\ds \int_{1}^{\infty} \frac{dx}{1+\log x}$ は $+\infty$ に発散す
+    る．
+  \end{proof}
+\end{example}
+
+\begin{example}
+  広義積分 $\ds \int_{0}^{3} \frac{\log x}{x} \ dx$ は $-\infty$ に発散する．
+
+  \begin{proof}
+    区間  $(0,3]$ において
+    \[
+      \frac{\log x}{x} \leq \frac{x-1}{x}
+    \]
+    であり，任意の $c \in (0,3]$ に対して
+    $\ds \frac{\log x}{x}, \, \frac{x-1}{x}$ は $[c,3]$ で連続なので積
+    分可能である．さらに，
+    \begin{align*}
+      \int_{0}^{3}\frac{x-1}{x} \ dx &= \lim_{a \to +0} \int_{a}^{3} \frac{x-1}{x}\ dx
+                                       = \lim_{a \to +0}\int_{a}^{3} \left( 1-\frac{1}{x}\right)\ dx
+                                       = \lim_{a \to +0}\left[ x-\log x\right]_{a}^{3} \\
+                                     &= \lim_{a \to +0}\left( 3-\log 3 -a + \log a\right)
+                                       =-\infty
+    \end{align*}
+    より，定理\ref{thm:divergent}から広義積分
+    $\ds \int_{0}^{3} \frac{\log x}{x}\ dx$ は $-\infty$ に発散する．
+  \end{proof}
+\end{example}
+
+\subsection{積分と広義積分}
+
+例えば，以下の積分の計算過程には広義積分が現れている．（$1 = x'$ とみなして部分積分）
+\[
+  \int_{0}^{1} \sin^{-1} x \ dx = \Big[ x \sin^{-1} x \Big]_{0}^{1} - \int_{0}^{1} \frac{x}{\sqrt{1-x^2}} \ dx
+  = \frac{\pi}{2} - \Big[ - \sqrt{1-x^2} \Big]_{0}^{1} = \frac{\pi}{2} - 1
+\]
+普通の積分計算に見えるかもしれないが，実は
+$\ds \int_{0}^{1}\frac{x}{\sqrt{1-x^2}} \ dx$ が広義積分である．
+\[
+  \int_{0}^{1} \frac{x}{\sqrt{1-x^2}} \ dx = \lim_{c \to 1-0} \int_{0}^{c} \frac{x}{\sqrt{1-x^2}} \ dx
+  = \lim_{c \to 1-0} \Big[-\sqrt{1-x^2}\Big]_{0}^{c} = \lim_{c \to 1-0} \left(1- \sqrt{1-c^2} \right) =1
+\]
+このように，実は広義積分だがそれに気づかずに計算してしまっても結果は正
+しく得られているが，そうなるように広義積分がうまく定義されている．よかったね．\\
+
+一方で，例えば以下の左辺はただの積分に見えるかもしれないが，被積分関数が $x=0$ で定義されていな
+いので広義積分である．
+
+\[
+  \int_{-1}^{1} \frac{dx}{x} : = \int_{-1}^{0} \frac{dx}{x} + \int_{0}^{1} \frac{dx}{x}
+\]
+右辺のどちらの広義積分も発散するので，この左辺は発散すると広義積分では定義している．これに気づかず
+\[
+  \textbf{（間違い）} \quad \int_{-1}^{1} \frac{dx}{x} = \Big[ \log|x| \Big]_{-1}^{1} = \log 1 - \log 1 =0 \quad
+  \textbf{（間違い）}
+\]
+と計算してしまうと，広義積分の定義とは合わない結論にたどり着いてしまう．気をつけよう．
+
+\newpage
+
+\subsection{練習問題}
+
+次の広義積分の収束・発散を明らかにしよう．
+
+\vspace{1zh}
+
+\begin{edaenumerate}<3>[(1)]
+
+  
+\item $\ds \int_{0}^{1} \frac{dx}{\sqrt{x}}$
+  
+\item $\ds \int_{0}^{1} \frac{dx}{x}$
+
+\item $\ds \int_{0}^{1} \frac{dx}{x^2}$
+
+\item $\ds \int_{1}^{\infty} \frac{dx}{\sqrt{x}}$
+
+\item $\ds \int_{1}^{\infty} \frac{dx}{x}$
+
+\item $\ds \int_{1}^{\infty} \frac{dx}{x^2}$
+
+\item $\ds \int_{-\infty}^{\infty} \frac{dx}{1+x^2}$
+
+\item $\ds \int_{-\infty}^{\infty} \frac{dx}{x^2}$
+
+\item $\ds \int_{-1}^{1} \frac{x}{\sqrt{1-x^2}}\ dx$
+
+\item $\ds \int_{-\infty}^{\infty} x \ dx$
+
+\item $\ds \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}\tan x\ dx$
+
+\item $\ds \int_{0}^{1} x \log x\ dx$
+
+\item $\ds \int_{0}^{1} \sqrt{1+\frac{1}{x^4}}\ dx$
+
+\item $\ds \int_{0}^{\infty} x e^{-x^2}\ dx$
+
+\item $\ds \int_{0}^{\infty} e^{-x^2}\ dx$
+
+\end{edaenumerate}
+
+\vspace{2zh}
+
+「積分基本問題集 壱」$(36) \sim (48)$ も参考にしてください．
+
+\begin{figure}[b]
+  答え : (1), (6), (7), (9), (12), (14), (15) は収束．残りは発散．
+\end{figure}
+
+\newpage
+
+\subsection{（おまけ）Beta 関数と Gamma 関数}
+
+広義積分によって定義される関数として有名な Beta 関数と Gamma 関数を紹介
+する．
+\begin{theorem}[\textbf{Beta 関数}]
+  以下の $2$ 変数関数 $B(p,q)$ は $p>0, q>0$ で定義され，\textbf{Beta 関
+    数}と呼ばれる．
+  \[
+    B(p,q) := \int_{0}^{1} x^{p-1} (1-x)^{q-1} \ dx
+  \]
+\end{theorem}
+
+\begin{proof}
+  $p \geqq 1$ かつ $q \geqq 1$ ではこれはただの連続関数の積分なので，ちゃ
+  んと値が定まる．問題は$0<p<1$ や $0<q<1$ で$B(p,q)$ が広義積分となる
+  ので，それがちゃんと収束することを証明しておく．
+
+  被積分関数を $\ds f(x) = x^{p-1}(1-x)^{q-1}$ として，次の $3$ つの場
+  合に分けて示していく．
+  \begin{enumerate}[(i)]
+
+  \item $p \geqq 1$ かつ $0 < q < 1$ のとき：$a:=p-1, b:=1-q$ とおけ
+    ば，$a \geqq 0$ かつ $0 < b < 1$ であり，
+    \[
+      f(x) = \frac{x^a}{(1-x)^b}
+    \]
+    と書ける．従って，$B(p,q)$ は半開区間 $[0,1)$ 上の広義積分であ
+    る．$x \in [0,1)$ において
+    \[
+      |f(x)| = \left|\frac{x^a}{(1-x)^b}\right| \leqq \frac{1}{(1-x)^b}
+    \]
+    であり，最右辺の $[0,1)$ 上の広義積分が次のように収束する
+    ので，定理\ref{thm:convergent}から $B(p,q)$ は収束する．
+    \[
+      \int_{0}^{1} \frac{dx}{(1-x)^b} = \lim_{c \to 1-0} \int_{0}^{c} (1-x)^{-b} \ dx
+      = \lim_{c \to 1-0} \left[ \frac{(1-x)^{1-b}}{b-1}\right]_{0}^{c}
+      =\lim_{c \to 1-0} \frac{ (1-c)^{1-b} - 1}{b-1} = \frac{1}{1-b}
+    \]
+    
+  \item $0 < p < 1$ かつ $q \geqq 1$ のとき：$u=1-x$ とおいて置換積分を
+    適用すれば，
+    \[
+      B(p,q) = \int_{0}^{1}  u^{q-1} (1-u)^{p-1} \ du \; \Big( = B(q,p) \Big)
+    \]
+    と書き換えられる．これが収束することは (i) で示した．
+    
+  \item $0 < p < 1$ かつ $0 < q < 1$ のとき：$a:=1-p, b:=1-q$ とおけ
+    ば，$0<a<1$ かつ $0<b<1$ であり，
+    \[
+      f(x) = \frac{1}{x^a (1-x)^b}
+    \]
+    と書けるので，$B(p,q)$ は開区間 $(0,1)$ 上の広義積分である．従っ
+    て，$B(p,q)$ を
+    \begin{equation}\label{eq:divide_beta}
+      B(p,q) = \int_{0}^{1/2} \frac{dx}{x^a(1-x)^b} + \int_{1/2}^{1} \frac{dx}{x^a (1-x)^b}
+    \end{equation}
+    と2個の広義積分の和に分けて両方が収束すること
+    を示せばよい．第1項に関しては，$\ds x \in \left( 0, 1/2\right]$ に対して $1/2 \leqq 1-x < 1$ なので
+    \[
+      |f(x)| = \left| \frac{1}{x^a(1-x)^b} \right| \leqq \frac{2^b}{x^a}
+    \]
+    であり，この最右辺の半開区間 $(0, 1/2]$ 上の広義積分が以下のように収束する．
+    \[
+      \int_{0}^{1/2} \frac{2^b}{x^a} \ dx = \lim_{ c \to +0} 2^b
+      \int_{c}^{1/2} x^{-a} \ dx = 2^b \lim_{ c \to +0}
+      \left[\frac{x^{1-a}}{1-a}\right]_{c}^{1/2} = 2^b
+      \lim_{c \to +0} \frac{2^{a-1} - c^{1-a}}{1-a} = \frac{2^{a+b-1}}{1-a}
+    \]
+    よって，定理\ref{thm:convergent}から(\ref{eq:divide_beta})の第1項は
+    収束する．第2項は(ii)と同じ置換積分で第1項と同じ形に帰着でき
+    る．\qedhere
+  \end{enumerate}
+\end{proof}
+
+\begin{theorem}[\textbf{Gamma 関数}]
+  以下の関数 $\varGamma(s)$ は $s>0$ で定義され，\textbf{Gamma 関数} と呼ばれる．
+  \[
+    \varGamma(s) := \int_{0}^{\infty} e^{-x} x^{s-1} \ dx
+  \]
+\end{theorem}
+
+\begin{proof}
+  広義積分 $\varGamma(s)$ を以下のように $x=1$ で2個に分ける．
+  \begin{equation}\label{eq:divide_gamma}
+    \varGamma(s) = \int_{0}^{1} e^{-x} x ^{s-1}  \ dx  + \int_{1}^{\infty} e^{-x} x^{s-1} \ dx
+  \end{equation}
+  
+  まず，右辺第1項を考える．$s \geqq 1$ ではこれはただの有界閉区間上の連
+  続関数の積分なので，ちゃんと値が定まる．$0<s<1$ ではこれは半開区間 $(0,
+  1]$ 上の広義積分である．このとき，$x \in (0, 1]$ に対して
+  \[
+    \left| e^{-x} x^{s-1}\right|  \leqq x^{s-1}
+  \]
+  であり，この右辺の半開区間 $(0, 1]$ 上の広義積分は以下のように収束す
+  るから，定理\ref{thm:convergent}により(\ref{eq:divide_gamma})の右辺第1項
+  は収束する．
+  \[
+    \int_{0}^{1} x^{s-1} \ dx = \lim_{c \to +0} \int_{c}^{1} x^{s-1} \
+    dx = \lim_{c \to +0} \left[ \frac{x^{s}}{s}\right]_{c}^{1}
+    = \lim_{c \to +0} \frac{1-c^s}{s} = \frac{1}{s}
+  \]
+
+  次に，(\ref{eq:divide_gamma})の第2項の広義積分が収束することを示す．$s >0$ とする．$s+1>1$ なので
+  \[
+    \lim_{x \to \infty} e^{-x} x^{s+1} = 0
+  \]
+  だから，十分大きな $x$ に対して $e^{-x} x^{s+1} <1 $ である．そこ
+  で，$x \geqq X$ では $e^{-x} x^{s+1} <1$ であるとすれば (\ref{eq:divide_gamma})の右辺第2項は
+  \begin{equation}\label{eq:divide-X}
+    \int_{1}^{\infty} e^{-x}x^{s-1} \ dx = \int_{1}^{X} e^{-x}x^{s-1} \ dx + \int_{X}^{\infty} e^{-x} x^{s-1} \ dx
+  \end{equation}
+  と分けられ，この右辺第1項はただの連続関数の積分なので，右辺第2項が収
+  束することを示せばよい．このとき，$x \in [X, \infty)$ に対して
+  \[
+    \left| e^{-x} x^{s-1}\right| = \frac{e^{-x}x^{s+1}}{x^2} < \frac{1}{x^2}
+  \]
+  であり，この最右辺の無限区間 $[X, \infty)$ 上の広義積分は以下のように収束する．
+  \[
+    \int_{X}^{\infty} \frac{dx}{x^2} = \lim_{c \to \infty} \int_{X}^{c} x^{-2} \ dx = \lim_{ c \to \infty} \Big[-x^{-1} \Big]_{X}^{c}
+    = \lim_{c \to \infty} \left( \frac{1}{X} - \frac{1}{c}\right) = \frac{1}{X}
+  \]
+  よって，定理\ref{thm:convergent}より(\ref{eq:divide-X}) の右辺第2項の広義積分は収束する．
+\end{proof}
+
+\begin{remark}
+  Gamma 関数 $\varGamma(s)$ は自然数の階乗 $n! = n (n-1)\cdots 2 \cdot 1$ の拡張と見なせる．実際，部分積分により
+  \[
+    \varGamma(s+1) = \int_{0}^{\infty} e^{-x} x^{s} \ dx = \Big[e^{-x}x^{s}\Big]_{0}^{\infty} + s \int_{0}^{\infty} e^{-x} x^{s-1} \ dx
+    = \lim_{c \to \infty} e^{-c}c^s + s \varGamma(s) = s\varGamma(s)
+  \]
+  となるので，自然数 $n$ に対しては
+  \[
+    \begin{aligned}
+      \varGamma(n) &= (n-1) \varGamma(n-1) = (n-1)(n-2) \varGamma(n-2) = \cdots = (n-1)(n-2) \cdots 2 \cdot 1 \cdot \varGamma(1)\\
+                   & = (n-1)! \varGamma(1) = (n-1)! \int_{0}^{-\infty} e^{-x} \ dx  = (n-1)! \lim_{c \to \infty} \Big[-e^{-x}\Big]_{0}^{c}
+                     = (n-1)!
+    \end{aligned}
+  \]
+  である．番号が1つずれるのが少し気持ち悪いが，とにかく $\Gamma(n) = (n-1)!$ となっている．
+\end{remark}
+
+
+
+\end{document}

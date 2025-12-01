@@ -1,0 +1,588 @@
+\documentclass[10pt, uplatex, dvipdfmx]{jsarticle}
+\usepackage{../mypackage}
+
+\graphicspath{{../pictures}}
+
+\setcounter{section}{0}
+
+\begin{document}
+
+\section{不定積分計算の基礎}
+
+\subsection{基礎中の基礎}\label{subsec:fundamental}
+
+なにはともあれ，以下の微分公式を思い出しておこう．いずれも春学期に学んだはず．
+\[\renewcommand{\arraystretch}{1.3}
+  \begin{array}[h]{c|ccccccccc}
+    f(x) & x^n & e^x & \log|x| & \sin x & \cos x & \tan x & \sin^{-1}x & \cos ^{-1} x & \tan^{-1} x\\ \hline
+    \\
+    f'(x) & n x^{n-1} & e^x & \dfrac{1}{x} & \cos x & -\sin x & \dfrac{1}{\cos^2x} & \dfrac{1}{\sqrt{1-x^2}}
+                                                                       & -\dfrac{1}{\sqrt{1-x^2}} & \dfrac{1}{1+x^2}
+  \end{array}
+\]
+この表を逆に読むことで，以下の基礎中の基礎の公式を導ける．面倒なので，以降積分定数は省略する．
+
+\vspace{1zh}
+
+\begin{itemize}
+  \setlength{\itemsep}{2zh}
+  
+\item
+  $\ds x^n = \frac{n+1}{n+1}~\!x^n = \frac{1}{n+1}\left(
+    x^{n+1}\right)' = \left( \frac{1}{n+1}~\!
+    x^{n+1}\right)'$ より \fbox{\;
+    $\ds \int x^n \ dx = \frac{1}{n+1}~ \! x^{n+1}  \quad (n \neq -1)$\;}
+
+\item $e^x = \left( e^x \right) ' $ より \fbox{ \; $\ds \int e^x \ dx = e^x $ \; }
+
+\item $\ds \frac{1}{x} = \left( \log x \right)' $ より \fbox{ \; $\ds \int \frac{dx}{x} = \log x $ \; }
+
+\item $\ds \cos x = \left( \sin x \right)'$ より \fbox{ \; $\ds \int \cos x \ dx = \sin x $ \; }
+
+\item
+  $\ds \sin x = - \left( - \sin x \right) = - \left( \cos x\right)' =
+  \left(- \cos x \right)'$ より \fbox{\;
+    $\ds \int \sin x \ dx = -\cos x $ \; }
+
+\item $\ds \frac{1}{\cos^2 x} = \left( \tan x \right)'$ より \fbox{\; $\ds \int \frac{dx}{\cos^2 x} = \tan x $\;}
+
+\item $\ds \frac{1}{\sqrt{1-x^2}} = \left( \sin^{-1}x
+  \right)'$ より \fbox{\;
+    $\ds \int \frac{dx}{\sqrt{1-x^2}} = \sin^{-1}x $\;}
+
+\item
+  $\ds \frac{1}{\sqrt{1-x^2}} = - \left(
+    -\frac{1}{\sqrt{1-x^2}}\right) = - \left( \cos^{-1} x \right)' =
+  \left( -\cos^{-1}x \right)'$ より \fbox{ \;
+    $\ds \int \frac{dx}{\sqrt{1-x^2}} = -\cos^{-1} x $\;}
+
+ \item $\ds \frac{1}{1+x^2} = \left( \tan^{-1}x\right)'$ より \fbox{\;  $\ds \int\frac{dx}{1+x^2} = \tan^{-1} x $ \;}
+\end{itemize}
+
+\newpage
+
+初めの公式 $\ds \int x^n \ dx = \frac{1}{n+1}~\! x^{n+1} $ において $n$ は自然数だけでなく，
+\[
+  \int \frac{1}{x^2} \ dx = \int x^{-2} \ dx = -x^{-1},\qquad
+  \int \sqrt{x} \ dx = \int
+  x^{\frac{1}{2}} \ dx =\frac{2}{3} x^{\frac{3}{2}}
+\]
+のように，$n=-2$ や $n=1/2$ などでも適用できるので，結構適用範囲が広い．\\
+
+
+合成関数の微分公式から，例えば $\left( \sin\left(3x\right)\right)' = 3
+\cos(3x)$
+なので，$\ds \cos(3x) = \frac{1}{3}\left( \sin (3x)\right)' = \left(
+  \frac{1}{3} \sin(3x) \right)'$ である．これを逆に読んで
+\[
+ \int\cos (3x) \ dx = \frac{1}{3} \sin (3x)
+\]
+を導ける．他にも，例えば $\left( e^{-2x}\right)' = -2 e^{-2x}$ なの
+で，$\ds e^{-2x} = -\frac{1}{2} \left( e^{-2x}\right)' = \left(
+-\frac{1}{2} e^{-2x}\right)'$ より
+\[
+  \int e^{-2x} \ dx = -\frac{1}{2} e^{-2x}
+\]
+である．このように，どんな方法であれ関数 $f$ に対して $F' = f$ となる $F$ を見つけてしまえば
+\[
+  \int f(x) \ dx = F(x)
+\]
+である．もう少しだけ複雑な例をあげておく．例えば
+$\ds \left( \tan^{-1} \frac{x}{2}\right)' = \frac{1/2}{1 + \left(x/2\right)^2} = \frac{2}{4+x^2}$ より
+\[
+  \frac{1}{4+x^2} = \frac{1}{2} \left( \tan^{-1}\frac{x}{2}\right)' = \left( \frac{1}{2}\tan^{-1}\frac{x}{2}\right)'
+\]
+となるので，これを逆に読めば
+\[
+  \int \frac{dx}{4+x^2} = \frac{1}{2} \tan^{-1}\frac{x}{2}
+\]
+を導ける．これと同様に，$\ds \left(\sin^{-1} \frac{x}{3} \right)' =
+\frac{1/3}{\sqrt{1-(x/3)^2}}=\frac{1}{\sqrt{9-x^2}}$ から
+\[
+  \int \frac{dx}{\sqrt{9-x^2}} = \sin^{-1} \frac{x}{3}
+\]
+などを導くこともできる．逆三角関数に臆することなく，しっかり使いこなせるようになろう．\\
+
+また，微分可能な関数 $f$ に対して，合成関数の微分公式から
+$\ds \left(\log | f(x) |\right)' = \frac{f'(x)}{f(x)}$ なので，
+\[
+  \fbox{\; $\ds \int \frac{f'(x)}{f(x)} \ dx = \log | f(x) |$\;}
+\]
+である．この形は割とよく現れるのでしっかり使いこなそう．例えば，次のような使い方ができる．
+\[
+  \begin{aligned}
+    &\int \tan x \ dx = \int \frac{\sin x }{\cos x} \ dx = \int  - \frac{\left( \cos x\right)'}{\cos x} \ dx
+      = - \log|\cos x| \\[2ex]
+    &\int \frac{x}{1+x^2} \ dx = \int \frac{1}{2}~ \frac{2x}{1+x^2} \ dx
+      = \int \frac{1}{2}~\frac{(1+x^2)'}{1+x^2} \ dx
+      = \frac{1}{2} \log|1+x^2|
+  \end{aligned}
+\]
+
+
+\newpage
+
+\subsection{積分計算のテクニック}
+
+基礎中の基礎の公式だけではもちろん足りないので，その他の公式（テクニック）を紹
+介する．\\
+
+まず，以下の積分の線形性は基本的すぎて公式として認識されていない
+かもしれない．
+\begin{itembox}[l]{積分の線形性}
+  \[
+    \int \left( \alpha f(x) + \beta g(x) \right) \ dx = \alpha \int
+    f(x) \ dx + \beta \int g(x) \ dx \quad (\alpha, \beta \text{ は定
+      数 } )
+  \]
+\end{itembox}
+これは微分の線形性
+$\left( \alpha F(x) + \beta G(x) \right)' = \alpha F'(x) + \beta
+G'(x)$ から容易に導かれる．例えば次のように使う．
+\[
+  \int \left( 3x^2 + 2e^x + \cos x \right) dx
+  = 3 \int x^2 \ dx + 2 \int e^x \ dx + \int \cos x \ dx 
+  = x^3  + 2 e^x + \sin x 
+\]\\
+
+
+次に，置換積分とその使い方を紹介する．この公式は合成関数の微分公式を逆に読めば導ける．
+\begin{itembox}[l]{置換積分}
+$u=g(x)$ が $C^1$ 級関数なら次が成り立つ．
+$$ \int f \left( g(x) \right ) \frac{du}{dx}\ dx  =\int f (u) \  du $$
+\end{itembox}
+
+
+
+\begin{itemize}
+  \setlength{\itemsep}{1zh}
+  
+\item $\ds \int (2x+1)^2 dx$
+
+  $u=2x+1$ とおくと， $\frac{du}{dx} = 2$ より $1 = \frac{1}{2} \frac{du}{dx}$ であるから，
+  \[
+    \int (2x+1)^2 \cdot 1 \ dx = \int u^2 \  \frac{1}{2} \frac{du}{dx} \  dx 
+    =  \frac{1}{2} \int u^2 \ du =  \frac{1}{6} u^3  = \frac{1}{6}(2x+1)^3 .
+  \]
+
+\item $\ds \int \frac{\cos x}{1+\sin x}dx$
+
+  $u=1+ \sin x$ とおくと，$\frac{du}{dx}=\cos x$ より， 
+  \[
+    \int \frac{\cos x}{1+\sin x}dx = \int \frac{1}{u} \frac{du}{dx} \ dx = 
+    \int \frac{du}{u} = \log |u|  =
+    \log | 1+ \sin x | .
+  \]
+
+\item $\ds \int xe^{x^2}dx$
+
+  $u=e^{x^2}$ とおくと，$\frac{du}{dx}=2x e^{x^2}$ より $xe^{x^2} = \frac{1}{2} \frac{du}{dx}$ であるから，
+  \[
+    \int xe^{x^2}dx = \int \frac{1}{2} \frac{du}{dx} \ dx  = \int \frac{1}{2} du
+    =\frac{1}{2}u=\frac{1}{2}e^{x^2}.
+  \]
+
+\item $\ds \int \tan x \ dx = \int \frac{\sin x}{\cos x} \ dx$
+
+  $u=\cos x$ とおくと，$\frac{du}{dx} = -\sin x$ より $\sin x = - \frac{du}{dx}$ であるから，
+  \[
+    \int \frac{\sin x}{\cos x} \ dx = \int \frac{1}{u} \left(- \frac{du}{dx} \right) \ dx
+    = -\int \frac{du}{u} = -\log|u|  = -\log| \cos x | .
+  \]
+\end{itemize}
+
+続いて，部分積分とその使い方を紹介する．この公式は積の微分公式を逆に読むことで導ける．
+\begin{itembox}[l]{部分積分}
+$f(x), \, g(x)$ がともに $C^1$ 級関数なら次が成り立つ．
+\[
+  \int f(x) g'(x) \ dx = f(x) g(x) - \int f'(x) g(x) \ dx
+\]
+\end{itembox}
+
+\begin{itemize}
+  \setlength{\itemsep}{2zh}
+\item $\ds \int x e^x dx = \int x \left( e^{x} \right)' \ dx = x e^x - \int e^x dx = xe^x -e^x $
+  
+\item $\ds \int x \log x \ dx = \int \left( \frac{x^2}{2} \right)' \log x
+      \ dx = \frac{x^2}{2} \log x - \int \frac{x^2}{2} \frac{1}{x} \ dx
+      = \frac{x^2}{2}\log x - \frac{x^2}{4} $
+
+\item $\ds \int \log x \ dx
+  = \int \left( x \right)' \log x \ dx = x \log x - \int \frac{x}{x} \ dx = x \log x -x $
+
+\item $\ds \int \tan^{-1} x \ dx  =\int \left( x \right)' \tan^{-1} x \ dx =x \tan^{-1}x - \int \frac{x}{1+x^2}\  dx
+  =x \tan^{-1}x -\frac{1}{2}\log (1+x^2)$\\
+
+  なお，$1+x^2>0$ なので $\log|1+x^2| = \log(1+x^2)$ である．
+  
+\item $\ds \int \sin^{-1}x \ dx= \int \left( x \right)' \sin^{-1} x \ dx
+    = x \sin^{-1}x - \int \frac{x}{\sqrt{1-x^2}} \ dx = x \sin^{-1} x
+    + \sqrt{1-x^2}$\\
+
+    後半は $u=1-x^2$ といて置換積分を適用すればよい．$\ds
+    \frac{du}{dx} = -2x$ なので $\ds x= -\frac{1}{2}\frac{du}{dx}$ である．
+    \[
+      \int \frac{x}{\sqrt{1-x^2}} = -\frac{1}{2}\int u^{-\frac{1}{2}}
+      \ du = -\frac{1}{2} \cdot 2 u ^{\frac{1}{2}} = -\sqrt{1-x^2}
+    \]
+    あるいは，$\ds \frac{x}{\sqrt{1-x^2}} = - \frac{-2x}{2\sqrt{1-x^2}} = -\frac{1}{2\sqrt{1-x^2}}\cdot (1-x^2)'
+    = \left(- \sqrt{1-x^2}\right)'$ とみなせればはやい．
+
+\item $\ds \int e^x \sin x \ dx$
+
+  \[
+    \begin{aligned}
+      \int e^{x} \sin x \ dx &= e^x \sin x - \int e^x \cos x \ dx = 
+      e^x \sin x - \left( e^x \cos x - \int e^x (-\sin x) \ dx \right)\\
+      &= e^x \left( \sin x - \cos x \right) - \int e^{x} \sin x \ dx
+    \end{aligned}
+  \]
+  より移項して，$\ds \int e^x \sin x \ dx = \frac{1}{2}e^x \left( \sin x - \cos x \right) $ を得る． 
+\end{itemize}
+
+\newpage
+
+\subsection{積分計算で悩んだら}
+
+積分の計算テクニックはそんなに多くない．迷ったらとりあえず以下を試して
+みよう．
+
+
+\begin{itemize}
+  \setlength{\itemsep}{2zh}
+
+\item \textbf{基礎中の基礎の公式を見逃していないか}
+
+例えば，以下は基礎中の基礎の公式に含まれているが，見逃す人が少なくない．
+\[
+\int \frac{dx}{\cos^2 x} = \tan x \qquad 
+\int \frac{dx}{\sqrt{1-x^2}}= \sin^{-1} x 
+\]
+まずは基礎中の基礎の公式を思い出そう．
+
+
+\item \textbf{部分積分はできないか}
+
+  求めたい積分が
+  \[
+    \int f(x) g(x) \ dx
+  \]
+  という形ならまずは部分積分を試そう．$F'(x)=f(x)$ とな
+  る $F(x)$ か $G'(x) = g(x)$ となる $G(x)$ がすぐに分かれば
+  \[
+    \int f(x) g(x) \ dx = F(x) g(x) - \int F(x) g'(x) \ dx
+  \]
+  あるいは
+  \[
+    \int f(x) g(x) \ dx = f(x) G(x) - \int f'(x) G(x) \ dx
+  \]
+  と変形できる．$F(x)$ も $G(x)$ もすぐに見つかった場合は，両方やってみ
+  て右辺に残った積分が求められそうな方を採用すればよい．どちらも見つか
+  らない場合や，見つかったとしても右辺に残った積分が難しい場合には別の
+  方法を考える．
+
+\item \textbf{置換積分はできないか}
+
+  結局のところ，うまい置換積分を見つけられるかどうかにかかっていること
+  が多い．失敗を恐れず，とにかくいろいろと試行錯誤してみよう．
+
+\item \textbf{その他}
+
+  分数関数や無理関数などは別途特殊なテクニックがあったり，自分で思いつ
+  くのが困難な置換積分も多々あるが，結局は上記のどれかに帰着される場合
+  が多い．また例えば，部分積分を
+  して右辺に残った積分の計算に置換積分を用いるなど複数のテクニックを用
+  いることも多い．
+
+\end{itemize}
+
+\newpage
+
+\subsection{練習問題}
+
+次の不定積分を求めよう．(答えは次のページ )
+
+
+\vspace{2zh}
+
+\begin{edaenumerate}<retusuu=3,gyoukan=2zh>[(1)]
+  
+  
+\item $\ds \int \left( 3x^2+5x-3 \right) dx$
+  
+\item $\ds \int \left(8x+2 \right)^3 dx$
+
+\item $\ds \int \frac{dx}{2x+1}$
+
+\item $\ds \int \frac{dx}{(2x+3)^3}$
+  
+\item $\ds \int \left(\frac{2}{x} - \frac{2}{x^3}\right) \ dx $
+  
+\item $\ds \int\frac{\sqrt[3]{x^2}}{\sqrt[5]{x^3}} \ dx$
+  
+\item $\ds \int \frac{1+\cos 2x}{2} \ dx$
+
+\item $\ds \int \frac{1-\cos 2x}{2} \ dx$
+ 
+\item $\ds \int \cos^2 x \ dx$
+ 
+\item $\ds \int \sin^2 x \ dx$
+    
+\item $\ds \int \frac{dx}{\cos^2 x}$
+  
+\item $\ds \int \tan^2 x \ dx$
+  
+\item $\ds \int \frac{dx}{x^2+4}$
+  
+\item $\ds \int \frac{dx}{\sqrt{2-x^2}}$
+  
+\item $\ds \int 2^x \ dx$
+
+\item $\ds \int \left( \frac{1}{3} \right)^x \ dx$
+
+\item $\ds \int \log_{2} x \ dx$
+
+\item $\ds \int x \log x \ dx$
+
+\item $\ds \int \frac{dx}{\tan x}$
+
+\item $\ds \cos^{-1}x \ dx$
+
+\item $\ds \int \frac{x}{x^2+2} \ dx$
+
+\item $\ds \int \frac{x}{\sqrt{1+x^2}} \ dx$
+
+\item $\ds \int \sin^{-1} \frac{x}{2} \ dx$
+
+\item $\ds \int \tan^{-1} (2x-1) \ dx$
+
+\item $\ds \int x^2 \cos x \ dx$
+
+\item $\ds \int e^x \cos x \ dx$
+
+\item $\ds \int x e^{-x^2} \ dx$
+
+\item $\ds \int \log(x^2) \ dx$
+
+\item $\ds \int \frac{x^3}{\sqrt{x^2+5}} \ dx$
+
+\item $\ds \int x^2 \sqrt{1+2x^3} \ dx$
+    
+\end{edaenumerate}
+
+\newpage
+
+
+\begin{center}
+  \textbf{解答}
+\end{center}
+積分定数は省略する．
+
+\vspace{1zh}
+
+\begin{edaenumerate}<retusuu=3, gyoukan=2zh>[(1)]
+  
+\item $\ds x^3 +\frac{5}{2}x^2-3x$
+
+\item $\ds \frac{1}{32}\left(8x+2\right)^4$
+
+\item $\ds \frac{1}{2}\log\left| 2x+1\right|$
+
+\item $\ds -\frac{1}{4}\left( 2x+3\right)^{-2}$
+
+\item $\ds 2\log | x | + x^{-2}$
+
+\item $\ds \frac{15}{16} x^{\frac{16}{15}}$
+
+\item $\ds \frac{1}{2}x+\frac{1}{4}\sin 2x$
+
+\item $\ds \frac{1}{2}x-\frac{1}{4}\sin 2x$
+
+\item $\ds \frac{1}{2}x+\frac{1}{4}\sin 2x$
+
+\item $\ds \frac{1}{2}x-\frac{1}{4}\sin 2x$
+
+\item $\ds \tan x$
+
+\item $\ds \tan x - x$
+
+\item $\ds \frac{1}{2} \tan^{-1}\frac{x}{2}$
+
+\item $\ds \sin^{-1}\frac{x}{\sqrt{2}}$
+
+\item $\ds \frac{2^x}{\log 2}$
+
+\item $\ds -\frac{3^{-x}}{\log 3}$
+
+\item $\ds \frac{x \log x - x}{\log 2}$
+
+\item $\ds \frac{1}{2}x^2 \log x - \frac{1}{4}x^2$
+
+\item $\ds \log\left| \sin x\right|$
+
+\item $\ds x \cos^{-1} x -\sqrt{1-x^2}$
+
+\item $\ds \frac{1}{2}\log \left( x^2+2\right)$
+
+\item $\ds \sqrt{1+x^2}$
+
+\item $\ds x\sin^{-1}\frac{x}{2} + \sqrt{4-x^2}$
+
+\item<1> $\ds \frac{1}{2}\left(2x-1\right)\tan^{-1}\left(2x-1\right)-\frac{1}{4}\log \left(2x^2-2x+1\right)$ 
+
+\item<2> $\ds x^2\sin x + 2x\cos x - 2 \sin x$
+
+\item $\ds \frac{1}{2}e^x\left( \cos x + \sin x\right)$
+
+\item $\ds -\frac{1}{2}e^{-x^2}$
+
+\item $\ds 2 \left( x \log x - x\right)$
+
+\item $\ds \frac{1}{3}\left(x^2-10 \right)\sqrt{x^2+5}$
+
+\item $\ds \frac{1}{9} \left(1+2x^3\right)^{\frac{3}{2}}$
+
+\end{edaenumerate}
+
+\newpage
+
+\subsection{（おまけ）不定積分と微分方程式}
+
+定積分を計算する過程で生じる不定積分計算において積分定数を省略しても大きな問題は起こらないが，微分
+方程式を解く過程での不定積分計算においては積分定数は明示しておいた方がよ
+い．\\
+
+与えられた関数 $f$ の不定積分を求めることは，最も基本的な微分方程式
+\[
+  F'(x) = f(x)
+\]
+の一般解 $F$ を求めることに相当する．例えば，微分方程式
+\[
+  F'(x) = x^2
+\]
+の一般解は任意の定数 $C$ を用いて
+\[
+  F(x) = \frac{1}{3}x^3 + C 
+\]
+と表せる．これはまさに以下の不定積分の計算そのものであり，この定数 $C$ が積分定数と呼ばれる．
+\[
+  \int x^2 \ dx = \frac{1}{3} x^3 +C
+\]
+これにさらに初期条件として，例えば $F(1) = 1$ などが加わると，
+\[
+  1=F(1) = \frac{1}{3}+C= 1
+\]
+から定数 $C$ が決定し，解が以下のようにただ1つに定まる．
+\[
+  F(x) = \frac{1}{3}x^3 + \frac{2}{3}
+\]
+
+\vspace{2zh}
+
+別の例を見てみよう．重力加速度 $g$ のもとで鉛直方向に自由落下をする質
+量 $m$ の物体の時刻 $t$ における位置 $x(t)$ は，以下の微分方程式を満た
+すことが知られている．
+\[
+  mx''(t) = -mg
+\]
+いわゆる，Newton の運動方程式である．この両辺を $m$ で割って $t$ で積分して
+\[
+  x'(t) = -g t +C_1
+\]
+が得られる．$C_1$ は積分定数である．さらに，両辺をもう一度 $t$ で積分して
+\[
+  x(t) = -\frac{1}{2}g t^2 + C_1 t + C_2
+\]
+が得られる．$C_2$ は積分定数である．これに初期位置や初速を指定する初期条件
+\[
+  x(0) = x_0, \quad x'(0)= v_0
+\]
+などが加わることで定数 $C_1, C_2$ が決定し，以下のように $x(t)$ が唯一つに定まる．
+\[
+  x(t) = -\frac{1}{2}g t^2 + v_0 t + x_0
+\]
+
+
+%\subsection{変数分離形の微分方程式}
+
+さらに別の例を紹介する．与えられた1変数関数 $f, g$ に対して，変数 $x$ に関
+する未知の関数 $y$ を含む
+\[
+  \frac{dy}{dx} = f(x) g(y)
+\]
+という形の微分方程式は変数分離形と呼ばれる．$g(y) \neq 0$ のとき，両辺を $g(y)$ で割って
+\[
+  \frac{1}{g(y)}\frac{dy}{dx} = f(x)
+\]
+と変形できる．この式の両辺を $x$ で積分して
+\[
+  \int \frac{1}{g(y)} \frac{dy}{dx} \ dx = \int f(x) \ dx
+\]
+を得る．ここで，置換積分により
+\[
+  \int \frac{1}{g(y)} \frac{dy}{dx} \ dx = \int \frac{dy}{g(y)}
+\]
+であるから，最終的に以下を得る．
+\[
+  \int \frac{dy}{g(y)} = \int f(x) \ dx
+\]
+これにより，$f, 1/g$ の不定積分が求められればそこから $y$ と $x$ の明示的な関係がわかる．
+
+\begin{remark}
+  この一連の操作は，もとの微分方程式を形式的に
+  \[
+    \frac{dy}{g(y)} = f(x) dx
+  \]
+  と変形してから両辺に $\ds \int$ を付け加えることで以下を導くこともできる．
+  \[
+    \int \frac{dy}{g(y)} = \int f(x) \ dx
+  \]
+  微分方程式の書籍等では（置換積分による説明を省い
+  て）このように形式的に説明されることも多い．\\
+\end{remark}
+
+
+変数分離形の最も簡単な例として，$f(x)=x, \; g(y)=y$ の場合を見てみよう．つまり，
+\[
+  \frac{dy}{dx} = x y
+\]
+を解こう．まず，定数関数 $y=0$ は明らかに上の微分方程式を満たすの
+で，$y=0$ は解の1つである．それ以外の解を求めよう．つまり $y \neq 0$ を仮定しているので，上の微分方程式を
+\[
+  \frac{dy}{y} = x dx
+\]
+と変形できる．この両辺を積分して
+\[
+  \log |y| =  \int \frac{dy}{y} = \int x dx = \frac{x^2}{2} +c
+\]
+が得られる．ここで，$c$ は積分定数である．これより
+\[
+  |y| = e^{\frac{x^2}{2}+c} = e^{c} \cdot e^{\frac{x^2}{2}}
+\]
+なので
+\[
+  y = \pm e^{c} \cdot e^{\frac{x^2}{2}}
+\]
+である．$C= \pm e^{c}$ とおいて
+\[
+  y= C e^{\frac{x^2}{2}}
+\]
+を得る．ここで，$c$ が任意の実数を動くとき，$C$ は $0$ 以外の任意の実
+数をとり得る．また，上式で $C=0$ のときは定数関数 $y=0$ を表している．
+よって，もとの微分方程式の解は，定数関数 $y=0$ も含めて以下のように表
+せる．
+\[
+  y = C e^{\frac{x^2}{2}} \quad (C \in \mathbb{R})
+\]
+これにさらに初期条件として，例えば $y(0) = 1$ などが加わると，
+\[
+  1=y(0) = C 
+\]
+から定数 $C$ が決定し，解が以下のようにただ1つに定まる．
+\[
+  y= e^{\frac{x^2}{2}}
+\]
+
+
+
+\end{document}
