@@ -114,6 +114,7 @@ $\ds \left( \int_{-\infty}^{\infty} e^{-x^2} \ dx \right)^2 = \pi$ であ
 \begin{equation}\label{eq:gauss-half}
   \fbox{$\ds \int_{0}^{\infty} e^{-x^2} \ dx = \frac{\sqrt{\pi}}{2}$}
 \end{equation}
+
 次に紹介する誤差関数$\ds \erf x = \frac{2}{\sqrt{\pi}}\int_{0}^{x}
 e^{-t^2} \ dt$ に$\ds \frac{2}{\sqrt{\pi}}$ という定数が含まれているの
 はこの(\ref{eq:gauss-half})が理由である．つまり，$\ds \lim_{x \to
@@ -122,5 +123,133 @@ e^{-t^2} \ dt$ に$\ds \frac{2}{\sqrt{\pi}}$ という定数が含まれてい�
 \newpage
 
 \subsection{誤差関数}
+
+$\mathbb{R}$ 上定義された次の関数は\textbf{誤差関数(error function)}と
+呼ばれる．
+\[
+  \erf x = \frac{2}{\sqrt{\pi}} \int_{0}^{x} e^{-t^2} \ dt
+\]
+定義とガウス積分に関する結果 (\ref{eq:gauss-half}) から以下が直ちにわかる．
+\begin{equation}\label{eq:prop-erf}
+   \erf 0 = 0, \quad \erf(-x) = -\erf(x), \quad \lim_{x \to \infty} \erf x = 1, \quad \lim_{x \to -\infty} \erf x =-1
+\end{equation}
+また，微分積分学の基本定理から
+\[
+  \frac{d}{dx} \erf x = \frac{2}{\sqrt{\pi}} e^{-x^2}
+\]
+である．つまり，以下の積分の公式が得られる．なお，積分定数は省略している．
+\begin{equation}\label{eq:int-exp-x2}
+  \int e^{-x^2} \ dx = \frac{\sqrt{\pi}}{2} \erf x
+\end{equation}
+初等関数の組み合わせでは表せない $e^{-x^2}$ の原始関数が誤差関
+数を用いて表せているが，実際には $e^{-x^2}$ の原始関数（の定数倍）に誤差
+関数という名前を付けただけである．
+
+\begin{example}\label{exmp:x2exp}
+  これまで扱いづらかった不定積分を $\erf$ を使って表すこともできる．
+  \[
+    \int x^2 e^{-x^2} \ dx = \int x \cdot xe^{-x^2}\ dx 
+    = x \left( -\frac{1}{2} e^{-x^2}\right) + \frac{1}{2} \int e^{-x^2} \ dx
+    = -\frac{1}{2} x e^{-x^2} + \frac{\sqrt{\pi}}{4} \erf x
+  \]
+\end{example}
+
+\vspace{1zh}
+
+
+\subsection{正規分布の累積分布関数と誤差関数}
+
+正規分布 $N(\mu, \sigma^2)$ の確率密度関数 $f_{\mu, \sigma^2}$ は次の式
+で与えられる．なお，$\exp (X) = e^X$ である．
+\[
+  f_{\mu, \sigma^2} (x) = \frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
+\]
+正規分布 $N(\mu, \sigma^2)$ に従う確率変数 $X$ が $a \leqq X \leqq b$
+である確率 $P_{\mu, \sigma^2}(a\leqq X \leqq b)$ は
+\[
+  P_{\mu,\sigma^2}(a \leqq X \leqq b) = \int_{a}^{b} f_{\mu, \sigma^2}(x) \ dx  
+  = \frac{1}{\sqrt{2\pi \sigma^2}}\int_{a}^{b} \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)\ dx
+\]
+である．特に，正規分布の累積分布関数，つまり $X \leqq x$ である確
+率 $P_{\mu, \sigma^2}(X \leqq x)$ は広義積分として
+\[
+  P_{\mu, \sigma^2}(X \leqq x) = \int_{-\infty}^{x} f_{\mu, \sigma^2}(t) \ dt
+  = \frac{1}{\sqrt{2\pi \sigma^2}} \int_{-\infty}^{x}
+  \exp\left( -\frac{(t-\mu)^2}{2\sigma^2}\right) \ dt
+\]
+と書ける．これを誤差関数 $\erf$ で表してみる．変数変換
+\[
+  u=\frac{t-\mu}{\sqrt{2\sigma^2}}\;  \left(\Leftrightarrow t= \mu + \sqrt{2\sigma^2} \ u\right)
+\]
+による置換積分によって，$P_{\mu,\sigma^2}(X \leqq x)$ は次のように書き換えられる．
+\begin{equation}\label{eq:P-erf}
+  P_{\mu,\sigma^2} (X \leq x)= \frac{1}{\sqrt{\pi}} \int_{-\infty}^{\frac{x-\mu}{\sqrt{2\sigma^2}}} e^{-u^2}\ du
+  =\frac{1}{2}\Big[\erf u\Big]_{-\infty}^{\frac{x-\mu}{\sqrt{2\sigma^2}}} 
+  = \frac{1}{2} + \frac{1}{2}\erf \frac{x-\mu}{\sqrt{2\sigma^2}}
+\end{equation}
+特に $\mu=0, \; \sigma=1$ のとき，つまり標準正規分布 $N(0,1)$ の累積分布関数は次のように書ける．
+\[
+  P_{0,1}(X \leqq x) = \frac{1}{2} + \frac{1}{2} \erf \frac{x}{\sqrt{2}}
+\]
+確率・統計の書籍では標準正規分布表として，この $P_{0,1}(X \leqq x)$ の
+値，あるいは $P_{0,1}(0 \leqq X \leqq x)$ の値の表が巻末に載っているこ
+とが多い．ここで，
+\[
+  P_{0,1}( x_1 \leqq X \leqq x_2) = P_{0,1}(X \leqq x_2) - P_{0,1}(X \leqq x_1), \quad P_{0,1}(X\leqq 0) = \frac{1}{2}
+\]
+より，$x \geqq 0$ のときはこれらの間に
+\[
+  P_{0,1}(X \leqq x) = P_{0,1}( 0 \leqq X \leqq x) + \frac{1}{2}
+\]
+という関係があるので，$P_{0,1}(X \leqq x)$ と $P_{0,1}(0 \leqq X \leqq x)$ の一方から
+他方の値は分かる．さらに，(\ref{eq:P-erf}) から
+\[
+  \erf x = 2P_{0,1}\left(X \leqq \sqrt{2}x\right) - 1 = 2P_{0,1}\left( 0 \leqq X \leqq \sqrt{2}x\right)
+\]
+なので，$\erf$ の値は標準正規分布表から読み取れるし，逆に $\erf$ から標準正規分布表を自作することもできる．
+
+
+
+\begin{example}[\textbf{正規分布の平均}]
+正規分布 $N(\mu, \sigma^2)$ の平均（期待値）は以下の広義積分で定義される．
+\[
+  \int_{-\infty}^{\infty} x f_{\mu, \sigma^2}(x) \ dx 
+  = \frac{1}{\sqrt{2\pi\sigma^2}}\int_{-\infty}^{\infty}x \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right) \ dx
+\]
+これが $\mu$ に等しいことは，変数変
+換
+\begin{equation}
+  \label{eq:x-mu-sigma-u}
+  u = \frac{x-\mu}{\sqrt{2\sigma^2}} \; \left( \Leftrightarrow x = \mu+\sqrt{2\sigma^2}~u\right)
+\end{equation}
+での置換積分とガウス積分 (\ref{eq:gauss-int})から以下のように確かめられる．
+\[
+  \int_{-\infty}^{\infty} x f_{\mu, \sigma^2}(x)\ dx 
+  = \frac{1}{\sqrt{\pi}}\int_{-\infty}^{\infty} \left( \mu + \sqrt{2\sigma^2}\ u\right) e^{-u^2} du
+  = \frac{\mu}{\sqrt{\pi}}\int_{-\infty}^{\infty} e^{-u^2} du 
+  + \sqrt{\frac{2\sigma^2}{\pi}} \underset{=0}{\uwave{\int_{-\infty}^{\infty} u e^{-u^2} du}}=\mu
+\]
+\end{example}
+
+\begin{example}[\textbf{正規分布の分散}]
+正規分布 $N(\mu, \sigma^2)$ の分散は以下の広義積分で定義される．
+\[
+  \int_{-\infty}^{\infty} (x-\mu)^2 f_{\mu,\sigma^2}(x)\ dx 
+  = \frac{1}{\sqrt{2\pi\sigma^2}} \int_{-\infty}^{\infty} (x-\mu)^2 \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)\ dx
+\]
+これが $\sigma^2$ に等しいことは，変数変換 (\ref{eq:x-mu-sigma-u})での
+置換積分と例\ref{exmp:x2exp}の結果および (\ref{eq:prop-erf}) から以下のように確かめられる．
+\[
+  \begin{aligned}
+    \int_{-\infty}^{\infty}(x-\mu)^2f_{\mu,\sigma^2}(x) dx 
+    &= \frac{2\sigma^2}{\sqrt{\pi}}\int_{-\infty}^{\infty} u^2 e^{-u^2}\ du
+      =\frac{4\sigma^2}{\sqrt{\pi}} \int_{0}^{\infty} u^2 e^{-u^2}\ du\\[1ex]
+    &= \frac{4\sigma^2}{\sqrt{\pi}} \lim_{c \to \infty} \left[ - \frac{1}{2}u e^{-u^2}
+      + \frac{\sqrt{\pi}}{4} \erf u \right]_{0}^{c}
+      = \sigma^2 \lim_{c \to \infty} \erf c
+      = \sigma^2
+  \end{aligned}
+\]
+\end{example}
 
 \end{document}
