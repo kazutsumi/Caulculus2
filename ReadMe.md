@@ -5,7 +5,7 @@
 講義ノート本体（全体）は [calcII.pdf](https://github.com/kazutsumi/Caulculus2/blob/main/calcII.pdf) です．
 
 各回のノートは番号名のフォルダ内にあります．
-例えば第1回のノートは [01](https://github.com/kazutsumi/Caulculus2/tree/main/01) という名前のフォルダ内にあります．<
+例えば第1回のノートは [01](https://github.com/kazutsumi/Caulculus2/tree/main/01) という名前のフォルダ内にあります．
 
 <br>
 
