@@ -1,0 +1,372 @@
+\documentclass[a4paper,10pt, uplatex, dvipdfmx]{jsarticle}
+\usepackage{amsmath,amsthm,amssymb,amsfonts,fancyhdr, enumerate, setspace, braket, emathEy, graphicx, ulem}
+
+\newcommand{\ds}{\displaystyle}
+
+
+
+
+\chead{13.5  練習問題 解答 }
+\lhead{}
+\rhead{}
+
+
+\pagestyle{fancy}
+
+\begin{document}
+
+
+
+\begin{enumerate}
+
+  \setlength{\itemsep}{2zh}
+
+\item 
+  \begin{enumerate}[(1)]
+    \setlength{\itemsep}{2zh}
+    
+  \item $D=\Set{(x,y) \ \mid \ x+y \leqq 1, \; 0 \leqq x, \; 0 \leqq y}$ とすれば
+    \[
+      V = \Set{(x,y,z) \ \mid \ (x,y) \in D, \; 0 \leqq z \leqq x}
+    \]
+    と書けるので，以下のように計算できる．
+    \[
+      \begin{aligned}
+        \iiint_{V} y \ dx dy dz
+        &= \iint_{D} \left( \int_{0}^{x} y \ dz \right) dx dy = \iint_{D} y \Big[ z \Big]_{z=0}^{z=x} \ dx dy
+          = \iint_{D} xy \ dx dy\\[1ex]
+        &= \int_{0}^{1} x\left( \int_{0}^{1-x} y \ dy \right) dx = \frac{1}{24}
+      \end{aligned}
+    \]
+
+  \item $D=\Set{(x,y) \ \mid \ 0 \leqq x \leqq y \leqq 1}$ とすれば
+    \[
+      V = \Set{(x,y) \ \mid \ (x,y) \in D, \; 0 \leqq z \leqq x+y}
+    \]
+    と書けるので，以下のように計算できる．
+    \[
+      \begin{aligned}
+        \iiint_{V} x \ dx dy dz
+        &= \iint_{D} \left( \int_{0}^{x+y} x \ dz \right) \ dx dy = \iint_{D} x \Big[ z \Big]_{z=0}^{z=x+y} \ dx dy\\[1ex]
+        &= \iint_{D}\left( x^2+xy\right) \ dx dy = \int_{0}^{1} \left( \int_{x}^{1}\left( x^2+xy\right) \ dy \right) dx
+          =\frac{5}{24}
+      \end{aligned}
+    \]
+
+  \item $V$ は上に凸で点 $(0,0,1)$ を頂点とする回転放物面 $z=
+    1-x^2-y^2$ と $xy$ 平面（つまり $z=0$）に囲まれた立体なの
+    で，$(x,y, z) \in V$ のとき，$x^2+y^2 \leqq 1$ である．従っ
+    て，$D=\Set{(x,y) \ \mid x^2+y^2 \leqq 1}$ とすれば
+    \[
+      V = \Set{(x,y,z) \ \mid \ (x,y) \in D, \; 0 \leqq z \leqq 1-x^2-y^2}
+    \]
+    と書けるので，極座標変換 $
+    \begin{cases}
+      x=r\cos\theta\\
+      y=r\sin\theta
+    \end{cases}$ を適宜使いながら以下のように計算できる．
+    \[
+      \begin{aligned}
+        \iiint_{V} x z \ dx dy dz
+        &= \iint_{D} \left( \int_{0}^{1-x^2-y^2} xz \ dz \right) dx dy
+          = \iint_{D} x \left[ \frac{z^2}{2}\right]_{z=0}^{z=1-x^2-y^2} dx dy\\[1ex]
+        &= \frac{1}{2} \iint_{D} x\left( 1-x^2-y^2 \right)^2 \ dx dy\\[1ex]
+        & = \frac{1}{2} \underset{=0}{\uwave{\left( \int_{0}^{2\pi} \cos \theta\ d\theta\right)}}
+          \left( \int_{0}^{1} r^2\left(1-r^2\right) \ dr\right)=0
+      \end{aligned}
+    \]
+    実は，積分範囲を $x \geqq 0$ の部分 $V^{+}$ と $x \leqq 0$ の部分 $V^{-}$ に分ければ被積分関数の対称性から
+    \[
+      \iiint_{V^{-}} xz \ dxdydz = - \iiint_{V^{+}} xz \ dxdydz
+    \]
+    なので，詳しく計算するまでもなく以下のようにすぐに結果がわかる．
+    \[
+      \iiint_{V} xz \ dx dy dz = \iiint_{V^{+}} xz \ dxdydz + \iint_{V^{-}}xz \ dx dy dz =0
+    \]
+
+    \newpage
+    
+
+  \item $V$ は平面 $x+y+z=1$ で空間を2分割したときの原点 O を含む側であっ
+    て，$x$座標，$y$ 座標，$z$ 座標のいずれもが $0$ 以上の部分である．
+    この平面 $x+y+z=1$ は3点
+    $\mathrm{A}(1,0,0), \; \mathrm{B}(0,1,0), \; \mathrm{C}(0,0,1)$ を
+    通る平面なので，$V$ は四面体 OABC の内側である．従っ
+    て，$D=\Set{(x,y) \ \mid \ x+y \leqq 1, \; x \geqq 0, \; y \geqq
+      0}$ とすれば
+    \[
+      V= \Set{(x,y,z) \ \mid \ (x,y) \in D, \; 0 \leqq z \leqq 1-x-y}
+    \]
+    と書けるので，以下のように計算できる．
+    \[
+      \begin{aligned}
+        \iiint_{V} xy \ dxdydz
+        &= \iint_{D} \left( \int_{0}^{1-x-y}  xy \ dz \right) \ dx dy
+          = \iint_{D} xy \Big[z\Big]_{z=0}^{z=1-x-y} \ dx dy\\[1ex]
+        &= \iint_{D} xy (1-x-y) \ dx dy = \int_{0}^{1} x \left( \int_{0}^{1-x}  \left( y-xy-y^2\right) \ dy \right) dx
+          = \frac{1}{120}
+      \end{aligned}
+    \]
+
+  \item $(x,y,z) \in V$ のとき，各座標の符号を反転させた以下
+    の $7$ 点も $V$ の点である．
+    \[
+      (-x,y,z), \; (x,-y,z), \; (x,y,-z), \; (-x,-y,z), \; (x,-y,-z),
+      \; (-x, y, -z), \; (-x, -y, -z)
+    \]
+    さらに，被積分関数 $x^2$ は $(x,y,z) \in V$ と上記 $7$ 点のいずれにおいても
+    同じ値をとるので，$V$ の $x \geqq 0, \; y \geqq 0, \; z \geqq 0$ の
+    部分に $V^{+}$ と名前をつければ以下が成り立つ．
+    \[
+      \iiint_{V} x^2 \ dx dy dz = 8 \iiint_{V^{+}} x^2 \ dx dy dz
+    \]
+    $V^{+}$ は前問(4)の $V$ と同じ集合なので，$D=\Set{(x,y) \ \mid \ x+y \leqq 1, \; x \geqq 0, \; y \geqq 0}$ によって
+    \[
+      V^{+} = \Set{(x,y,z) \ \mid \ (x,y) \in D, \; 0 \leqq z \leqq 1-x-y}
+    \]
+    と書ける．よって，以下のように計算できる．
+    \[
+      \begin{aligned}
+        \iiint_{V} x^2 \ dx dy dz
+        &= 8 \iint_{D}\left( \int_{0}^{1-x-y} x^2 \ dz \right) \ dx dy
+          = 8 \iint_{D} x^2 \Big[ z \Big]_{z=0}^{z=1-x-y} \ dx dy\\[1ex]
+        &= 8 \iint_{D} x^2 \left( 1-x-y\right) \ dx dy
+          = 8 \int_{0}^{1} x^2 \left(\int_{0}^{1-x-y} \left( 1-x-y\right) dy \right) dx = \frac{2}{15}
+      \end{aligned}
+    \]
+  \end{enumerate}
+
+\item
+  \begin{enumerate}[(1)]
+    \setlength{\itemsep}{2zh}
+
+  \item 以下の変数変換で $W=\Set{ (u,v,w) \ \mid \ 0 \leqq u \leqq 1, \; 0
+      \leqq v \leqq 2, \; 0 \leqq w \leqq 1}$ が $V$ に変換される．
+    \[
+      \begin{cases}
+        u = x+2y\\
+        v = y+z\\
+        w = z-3x
+      \end{cases}
+      \left[ \Leftrightarrow \left[
+          \begin{array}{c}
+            u\\
+            v\\
+            w
+          \end{array}
+        \right] = \left[
+          \begin{array}{rrr}
+            1 & 2 & 0\\
+            0 & 1 & 1\\
+            -3 & 0 & 1
+          \end{array}
+        \right] \left[
+          \begin{array}{c}
+            x\\
+            y\\
+            z
+          \end{array}
+        \right] \Leftrightarrow \left[
+          \begin{array}{c}
+            x\\
+            y\\
+            z
+          \end{array}
+        \right] = \left[
+          \begin{array}{rrr}
+            1 & 2 & 0\\
+            0 & 1 & 1\\
+            -3 & 0 & 1
+          \end{array}
+        \right]^{-1} \left[
+          \begin{array}{c}
+            u\\
+            v\\
+            w
+          \end{array}
+        \right]\right]
+    \]
+    この変換の Jacobian は
+    \[
+      J(u,v,w) = \left|
+        \begin{array}{ccc}
+          x_u & x_v & x_w\\
+          y_u & y_v & y_w\\
+          z_u & z_v & z_w
+        \end{array}
+      \right| = \left| \left[
+          \begin{array}{rrr}
+            1 & 2 & 0\\
+            0 & 1 & 1\\
+            -3 & 0 & 1
+          \end{array}
+        \right]^{-1}\right| = \left|
+        \begin{array}{rrr}
+          1 & 2 & 0\\
+          0 & 1 & 1\\
+          -3 & 0 & 1
+        \end{array}
+      \right|^{-1} = \left( -5\right)^{-1} = -\frac{1}{5}
+    \]
+    なので，以下のように計算できる．
+    \[
+      \begin{aligned}
+        \iiint_{V} (x+y)(y+z)(z-3x) \ dx dy dz
+        &= \iiint_{W} uvw \left| J(u,v,w) \right|\ du dv dw\\[1ex]
+        &  = \frac{1}{5} \left( \int_{0}^{1} u \ du\right) \left( \int_{0}^{2} v \ dv\right) \left( \int_{0}^{1} w \ dw\right)
+          = \frac{1}{10}
+      \end{aligned}
+    \]
+
+  \item 3次元の極座標変換 $x = r \cos\theta \cos\varphi, \; y = r\sin\theta \cos\varphi, \; z = r\sin\varphi$ によって
+    \[
+      W = \Set{(r,\theta, \varphi) \ | \ 0 \leqq r \leqq 1, \; 0 \leqq \theta \leqq 2\pi, \;
+        -\frac{\pi}{2} \leqq \varphi \leqq \frac{\pi}{2}}
+    \]
+    が $V$ に変換される．変換の Jacobian は
+    \[
+      J(r, \theta, \varphi) = \left|
+        \begin{array}{ccc}
+          x_{r} & x_{\theta} & x_{\varphi}\\
+          y_{r} & y_{\theta} & y_{\varphi}\\
+          z_{r} & z_{\theta} & z_{\varphi}
+        \end{array}
+      \right| = \left|
+        \begin{array}{ccc}
+          \cos \theta \cos \varphi & -r \sin\theta \cos \varphi & -r\cos\theta \sin\theta\\
+          \sin \theta \cos \varphi & r\cos\theta \cos\varphi & -r\sin\theta \sin \varphi\\
+          \sin \varphi & 0 & \cos \varphi
+        \end{array}
+      \right| = r^2 \cos \varphi
+    \]
+    なので，以下のように計算できる．
+    \[
+      \begin{aligned}
+        \iiint_{V} \sqrt{x^2+y^2+z^2} \ dx dy dz
+        &= \iiint_{W} r ~| J(r, \theta, \varphi)| \ dr d\theta d\varphi\\[1ex]
+        & = \left(\int_{0}^{1}r^3\ dr\right) \left( \int_{0}^{2\pi}d\theta\right)
+          \left(\int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} \cos \varphi \ d\varphi\right) = \pi
+      \end{aligned}
+    \]
+    
+  \item 前問(2)と同じ極座標変換を使う．$W$ も $J(r, \theta, \varphi)$ も前問と同じものである．
+    \[
+      \begin{aligned}
+        \iiint_{V} \sqrt{1-x^2-y^2-z^2} \ dx dy dz
+        &= \iiint_{W} \sqrt{ 1-r^2} ~|J(r, \theta, \varphi)| \ dr d\theta d\varphi\\[1ex]
+        &= \left( \uwave{\int_{0}^{1} r^2 \sqrt{1-r^2} \ dr}\right) \left( \int_{0}^{2\pi} d\theta\right)
+          \left( \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} \cos\varphi \ d\varphi\right) = \frac{\pi^2}{4}
+      \end{aligned}
+    \]
+    波線部は $r=\sin\theta \left( \Leftrightarrow \theta = \sin^{-1}r\right)$ とおいて置換積分を適用すればよい．
+
+  \item
+    前々問(2)と同じ極座標変換を使う．$\ds W=\Set{(r, \theta, \varphi) \ |
+      \ 0 \leqq r \leqq 1, \; 0 \leqq \theta \leqq \frac{\pi}{2}, \; 0
+      \leqq \varphi \leqq \frac{\pi}{2}}$ が $V$ に変換される．Jacobian は (2) と同じなので，以下のように計算できる．
+    \[
+      \begin{aligned}
+        \iiint_{V} x \ dx dy dz
+        &= \iiint_{W}  r \cos\theta \cos \varphi |J(r,\theta, \varphi)| \ dr d\theta d\varphi\\[1ex]
+        &= \left( \int_{0}^{1} r^3 \ dr \right) \left( \int_{0}^{\frac{\pi}{2}} \cos \theta \ d\theta\right)
+          \left( \int_{0}^{\frac{\pi}{2}} \cos^2 \varphi \ d\varphi\right) = \frac{\pi}{16}
+      \end{aligned}
+    \]
+
+    \newpage
+    
+  \item 円柱座標 $x=r\cos\theta, \; y=r\sin\theta, \; z=z$ によって，$r\theta z$ 空間の
+    \[
+      W = \Set{(r, \theta, z) \ | \ 0 \leqq r \leqq \cos \theta, \; -\frac{\pi}{2} \leqq \theta \leqq \frac{\pi}{2}, \;
+        0 \leqq z \leqq \sqrt{1-r^2}}
+    \]
+    が $V$ に変換される．この変換の Jacobian は
+    \[
+      J(r,\theta, z) = \left|
+        \begin{array}{ccc}
+          x_{r} & x_{\theta} & x_{z}\\
+          y_{r} & y_{\theta} & y_{z}\\
+          z_{r} & z_{\theta} & z_{z}
+        \end{array}
+      \right| = \left|
+        \begin{array}{ccc}
+          \cos \theta & -r\sin \theta & 0\\
+          \sin \theta & r \cos\theta & 0\\
+          0 & 0 & 1
+        \end{array}
+      \right| = r
+    \]
+    なので，3重積分は以下のように変換できる．
+    \[
+      \iiint_{V} z \ dx dy dz = \iiint_{W} z | J(r, \theta, z)| \ dr d\theta dz  = \iiint_{W} rz \ dr d\theta dz
+    \]
+    ここで，$\ds D=\Set{(r, \theta) \ | \ 0 \leqq r \leqq \cos \theta,
+      \; -\frac{\pi}{2} \leqq \theta \leqq \frac{\pi}{2}}$ とすれば
+    \[
+      W = \Set{(r,\theta, z) \ \mid \ (r,\theta) \in D, \; 0 \leqq z \leqq \sqrt{1-r^2}}
+    \]
+    と書けるので，続きは以下のように計算できる．
+    \[
+      \begin{aligned}
+        \iiint_{V} z \ dx dy dz
+        &= \iint_{D} \left( \int_{0}^{\sqrt{1-r^2}} rz \ dz \right) dr d\theta
+          = \iint_{D} r \left[ \frac{z^2}{2}\right]_{z=0}^{z=\sqrt{1-r^2}} dr d\theta\\[1ex]
+        &= \frac{1}{2}\iint_{D} r \left(1-r^2\right) \ dr d\theta
+          = \frac{1}{2} \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} \left( \int_{0}^{\cos\theta} \left(r-r^3\right) \ dr \right) d\theta
+          = \frac{5\pi}{64}
+      \end{aligned}
+    \]
+
+    \begin{figure}[h]
+      \centering
+      \includegraphics[height=10cm]{pictures/fig2-5.jpg}
+    \end{figure}
+  \end{enumerate}
+
+  \newpage
+  
+\item 3重積分 $\ds \iiint_{V} dx dy dz$ を計算すればよい．計算を楽にするために $V$ の対称性を利用する．
+  \[
+    V^{+} = \Set{(x,y,z) \in V \ \mid \ x \geqq 0, \; y \geqq 0, \; z \geqq 0}
+  \]
+  とすれば以下が成り立つ．
+  \[
+    \iiint_{V} = 8 \iiint_{V^{+}} dx dy dz
+  \]
+  さらに，$xy$ 平面の第1象限にある
+  \[
+    D=\Set{(x,y) \ \mid \ x^2+y^2 \leqq R^2, \; x \geqq 0 , \; y \geqq 0}
+  \]
+  を $x \geqq y$ の部分と $x \leqq y$ の部分に分けて
+  \[
+    D_1=\Set{(x,y) \in D\ \mid \ x \geqq y} , \quad D_2=\Set{(x,y) \in D \ \mid \ x \leqq y}
+  \]
+  と名前をつけて
+  \[
+    V^{+}_{1} = \Set{(x,y,z) \in V^{+} \ \mid \ (x,y) \in D_1}, \quad
+    V^{+}_{2} =\Set{(x,y,z) \in V^{+} \ \mid \ (x,y) \in D_2}
+  \]
+  とすれば，やはり $V^{+}$ の対称性から $\ds \iiint_{V^{+}_{1}} \ dx dy dz = \iiint_{V^{+}_{2}} dx dy dz$ なので
+  \[
+    \iiint_{V^{+}} dx dy dz = \iiint_{V^{+}_{1}} dx dy dz + \iiint_{V^{+}_{2}} dx dy dz = 2 \iiint_{V^{+}_1} dx dy dz
+  \]
+  である．$(x,y) \in D_1$ のとき，つまり $x \geqq y$ のとき，$\sqrt{R^2-x^2} \leqq \sqrt{R^2-y^2}$ なので
+  \[
+    V^{+}_{1} = \Set{(x,y,z) \ \mid \ (x,y) \in D_1, \; 0 \leqq z \leqq \sqrt{R^2-x^2}}
+  \]
+  と書けるので，求めたい体積 $\ds \iiint_{V} \ dx dy dz$ は以下のように計算できる．
+  \[
+    \begin{aligned}
+      \iiint_{V} dx dy dz
+      &= 16 \iiint_{V^{+}_1} dx dy dz = 16 \iint_{D_1} \left( \int_{0}^{\sqrt{1-x^2}} dz \right) \ dx dy
+        = 16 \iint_{D_1} \sqrt{R^2-x^2} \ dx dy\\[1ex]
+      & = \int_{0}^{\frac{R}{\sqrt{2}}} \left( \int_{0}^{x} \sqrt{R^2-x^2} \ dy \right) dx
+        + \int_{\frac{R}{\sqrt{2}}}^{R} \left( \int_{0}^{\sqrt{R^2-x^2}} \sqrt{R^2-x^2}\ dy \right) dx\\[1ex]
+      &= \int_{0}^{\frac{R}{\sqrt{2}}} x \sqrt{R^2-x^2} \ dx + \int_{\frac{R}{\sqrt{2}}}^{R} \left( R^2-x^2\right) \ dx
+        = \left( 16-8\sqrt{2}\right) R^3
+    \end{aligned}
+  \]
+\end{enumerate}
+
+\end{document}
+
